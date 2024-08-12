@@ -8,6 +8,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
 import Markdown from 'react-markdown'
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 
 async function Posts({
@@ -31,7 +33,7 @@ async function Posts({
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post['user_id']}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
-              <Markdown>{post.header}</Markdown>
+              <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-2 justify-center items-center">
