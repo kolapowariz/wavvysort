@@ -23,12 +23,12 @@ export default function LandingPage() {
     return (
         <section className="w-[90%] mx-auto">
             {showImage ? <div className='w-full h-full flex justify-center mt-80'>
-                <h1 className="text-7xl md:text-9xl">wavvySort</h1>
+                <Image src='/image.svg' alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />                
             </div> : <>
                 <section className="md:hidden mt-2">
                     <div className="flex justify-between items-center">
                         <div className=" flex justify-between">
-                            <Image src='/favicon.ico' alt="Logo" width={30} height={10} className=" h-auto" priority />
+                            <Image src='/image.svg' alt="Logo" width={40} height={30} className=" h-auto" priority />
                         </div>
                         <div> 
                             <Link href='/dashboard' ><Button className="">Dashboard</Button></Link>
@@ -40,7 +40,7 @@ export default function LandingPage() {
                     </div>
                     <div className="flex flex-col items-center">
                         <h1 className="uppercase w-52 mt-4 mb-8 text-2xl text-center">Create and access content all in one place.</h1>
-                        <Image src={nft} alt="Logo" width={400} height={400} className="mb-8 rounded-full " priority />
+                        <Image src='/image.svg' alt="Logo" width={400} height={600} className="mb-8 rounded-3xl " priority />
 
                         <Link href='/signup'>
                             <Button className="w-72 bg-[#09233c] p-2 mb-2 rounded-full h-12 text-white text-lg">Create an Account</Button>
@@ -60,7 +60,7 @@ export default function LandingPage() {
                         <nav className="flex justify-between items-center">
                             <div className="">
 
-                                <Image src='/next.svg' alt="Logo" width={60} height={40} priority className=" h-auto" />
+                                <Image src='/image.svg' alt="Logo" width={60} height={40} priority className=" h-auto" />
                             </div>
                             <ul className="flex justify-around">
                                 <li className="p-2 mr-2"><Link href="">Home</Link></li>

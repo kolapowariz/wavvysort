@@ -15,7 +15,7 @@ export default function SignupForm() {
 
             <Image
               alt="Your Company"
-              src="/favicon.ico"
+              src="/image.svg"
               className="mx-auto h-10 w-auto"
               width={70}
               height={70}

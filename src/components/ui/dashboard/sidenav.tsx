@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import NavLinks from '@/components/ui/dashboard/nav-links';
-import nft from '../../../../public/nft.jpg'
 import { PowerIcon } from '@heroicons/react/24/outline';
 import {
   DropdownMenu,
@@ -27,7 +26,7 @@ export default async function SideNav() {
         href="/"
       >
         <div className="w-10 md:w-20">
-          <Image src={nft} width={60} height={10} alt="NFT Logo" priority className='rounded-full' />
+          <Image src='/image.svg' width={60} height={10} alt="NFT Logo" priority className='rounded-full mx-auto' />
         </div>
       </Link>
       <div className="flex grow md:grow-0  justify-around space-x-2 md:flex ">

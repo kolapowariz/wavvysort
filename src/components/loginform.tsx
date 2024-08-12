@@ -8,14 +8,6 @@ import { redirect } from "next/navigation";
 
 export default function LoginForm() {
 
-  // const supabase = await createClient();
-
-  // const { data: { user}} = await supabase.auth.getUser();
-
-  // if (user) {
-  //   return redirect('/editor')
-  // }
-
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -24,7 +16,7 @@ export default function LoginForm() {
 
             <Image
               alt="Your Company"
-              src="/favicon.ico"
+              src="/image.svg"
               width={60}
               height={60}
               className="mx-auto h-10 w-auto"
