@@ -23,7 +23,8 @@ export default function LandingPage() {
     return (
         <section className="w-[90%] mx-auto">
             {showImage ? <div className='w-full h-full flex justify-center mt-80'>
-                <Image src='/image.svg' alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />                
+                {/* <Image src='/image.svg' alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />                 */}
+                <h1 className="text-center text-7xl md:text-9xl">wavvySort</h1>
             </div> : <>
                 <section className="md:hidden mt-2">
                     <div className="flex justify-between items-center">
