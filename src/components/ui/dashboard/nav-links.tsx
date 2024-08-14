@@ -16,6 +16,10 @@ const links = [
     name: 'Editor',
     href: '/dashboard/editor',
     icon: DocumentDuplicateIcon,
+  },{
+    name: 'My Posts',
+    href: '/dashboard/userPosts',
+    icon: UserGroupIcon,
   }
 ];
 

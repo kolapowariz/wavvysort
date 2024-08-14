@@ -2,17 +2,21 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { z } from 'zod'
+
+const FormSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+})
 
 export async function createPost(formData: FormData) {
-  const supabase = createClient()
-
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    title: formData.get('title') as string,
-    content: formData.get('content') as string,
-  }
-
+  const supabase = createClient();
+  
+  const data = FormSchema.parse({
+    title: formData.get('title'),
+    content: formData.get('content'),
+  })
+  
   const header = data.content.slice(0, 100)
 
   if (!data.title && !data.content) {
@@ -100,4 +104,38 @@ export async function deletePost(postId: string) {
   } catch (error) {
     console.error('Error deleting post catch action:', error)
   }
+}
+
+export async function updatePost(postId: string, formData: FormData) {
+  const supabase = createClient();
+
+  const data = FormSchema.parse({
+    title: formData.get('title'),
+    content: formData.get('content'),
+  })
+  
+  const header = data.content.slice(0, 100)
+
+  
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+
+  if (!data.title && !data.content) {
+    throw new Error('Title and content are required');
+  }
+
+  const { error } = await supabase.from('posts').update({
+    title: data.title,
+    content: data.content,
+    header: header,
+  }).eq('id', postId).eq('email', user?.email ?? '');
+
+  if (error) {
+    console.log('Error updating post:', error);
+  }
+
+  revalidatePath('/editor', 'layout');
+  redirect('/dashboard');
 }

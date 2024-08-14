@@ -20,7 +20,7 @@ async function UserPosts() {
     return redirect('/login')
   }
 
-  const posts: Post[] = await fetchUserPosts(user.id) as Post;
+  const posts: Post[] = await fetchUserPosts(user.id) as unknown as Post[];
 
   return (
     <div>
