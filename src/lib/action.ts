@@ -38,6 +38,7 @@ export async function createPost(formData: FormData) {
     created_at: new Date().toUTCString(),
     id: crypto.randomUUID(),
     header: header,
+    email: user?.email,
   })
 
   if (error) {
@@ -97,12 +98,12 @@ export async function deletePost(postId: string) {
     .eq('id', postId)
     
     if (deleteError) {
-      throw new Error('Error deleting post try action: ' + deleteError.message)
+      throw new Error('Error deleting post try action')
     }
     revalidatePath('/dashboard/')
     redirect('/dashboard')
   } catch (error) {
-    console.error('Error deleting post catch action:', error)
+    console.error('Error deleting post catch action')
   }
 }
 
@@ -130,6 +131,8 @@ export async function updatePost(postId: string, formData: FormData) {
     title: data.title,
     content: data.content,
     header: header,
+    email: user?.email,
+    updated_at: new Date().toUTCString(),
   }).eq('id', postId).eq('email', user?.email ?? '');
 
   if (error) {
@@ -137,5 +140,5 @@ export async function updatePost(postId: string, formData: FormData) {
   }
 
   revalidatePath('/editor', 'layout');
-  redirect('/dashboard');
+  redirect('/dashboard/userPosts');
 }
