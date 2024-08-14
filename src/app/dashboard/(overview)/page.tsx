@@ -22,13 +22,13 @@ async function Posts({
   query?: string;
 }) {
   const finalQuery = query || (searchParams?.query || '');
-  const posts = await fetchFilteredPosts(finalQuery);
+  const posts: Post[] = await fetchFilteredPosts(finalQuery) as Post[];
 
   return (
     <>
       <ul>
 
-        {posts!.map((post: Post) => (
+        {posts.map((post: Post) => (
           <li key={post.id} className=" mt-2 mb-4 border-b-2 md:w-[50%]">
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post['user_id']}</p>
