@@ -1,15 +1,13 @@
-
 import Search from "@/components/search";
 import { DashboardSkeleton } from "@/components/skeleton";
-import { Button } from "@/components/ui/button";
 import { fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Link from "next/link";
 import { Suspense } from "react";
-import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
 import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { notFound } from "next/navigation";
 
 
 async function Posts({
@@ -23,7 +21,9 @@ async function Posts({
 }) {
   const finalQuery = query || (searchParams?.query || '');
   const posts: Post[] = await fetchFilteredPosts(finalQuery) as Post[];
-
+  if (!posts) {
+    notFound();
+  }
   return (
     <>
       <ul>

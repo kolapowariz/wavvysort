@@ -1,6 +1,18 @@
 import { deletePost } from '@/lib/action';
 import { TrashIcon, PencilIcon, PlusIcon, } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from '../button';
 
 
 export function DeletePost({ id }: { id: string }) {
@@ -58,18 +70,7 @@ export function UpdatePost({ id }: { id: string }) {
 
 
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from '../button';
+
 
 // export function AlertDialogComponent() {
 //   return (

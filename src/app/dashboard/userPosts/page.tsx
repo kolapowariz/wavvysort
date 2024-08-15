@@ -9,6 +9,7 @@ import { DeletePost, UpdatePost } from "@/components/ui/dashboard/differentButto
 import { UserPostsSkeleton } from "@/components/skeleton";
 import { Suspense } from "react";
 import { Post } from "@/types/custom";
+import { notFound } from "next/navigation";
 
 async function UserPosts() {
 
@@ -22,6 +23,10 @@ async function UserPosts() {
 
   const posts: Post[] = await fetchUserPosts(user.id) as unknown as Post[];
 
+  if (!posts) {
+    notFound();
+  }
+
   return (
     <div>
       <h1 className="text-center text-3xl">Posts Written By {user.email}</h1>
@@ -29,7 +34,6 @@ async function UserPosts() {
         {posts!.map((post) => (
           <li key={post.id} className=" mt-2 mb-4 border-b-2 md:w-[50%]">
             <Link href={`/dashboard/${post.id}`}>
-              {/* <p className="text-xs">{post['user_id']}</p> */}
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
