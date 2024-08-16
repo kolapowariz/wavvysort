@@ -27,9 +27,9 @@ const Foot = () => {
             <div className='flex flex-col gap-4'>
                 <p className='font-bold'>Product</p>
                 <div className='flex flex-col gap-4 text-gray-600 font-light'>
-                    <Link href={"/"}>Hospitals</Link>
-                    <Link href={"/"}>Pharmacies</Link>
-                    <Link href={"/"}>Diagnostic Centers</Link>
+                    <Link href={"/"}>Posts</Link>
+                    <Link href={"/"}>Posts</Link>
+                    <Link href={"/"}>Posts</Link>
                 </div>
             </div>
             <div className='flex flex-col gap-4'>
