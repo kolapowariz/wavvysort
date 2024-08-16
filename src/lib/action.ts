@@ -19,7 +19,7 @@ export async function createPost(formData: FormData) {
   
   const header = data.content.slice(0, 100)
 
-  if (!data.title && !data.content) {
+  if (data.title === null || data.title === undefined || data.title === '' && data.content === null || data.content === undefined || data.content === '') {
     throw new Error('Title and content are required')
   }
 
@@ -123,8 +123,8 @@ export async function updatePost(postId: string, formData: FormData) {
   } = await supabase.auth.getUser();
 
 
-  if (!data.title && !data.content) {
-    throw new Error('Title and content are required');
+  if (data.title === null || data.title === undefined || data.title === '' && data.content === null || data.content === undefined || data.content === '') {
+    throw new Error('Title and content are required')
   }
 
   const { error } = await supabase.from('posts').update({
