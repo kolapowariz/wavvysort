@@ -39,6 +39,7 @@ export async function createPost(formData: FormData) {
     id: crypto.randomUUID(),
     header: header,
     email: user?.email,
+    updated_at: new Date().toUTCString(),
   })
 
   if (error) {

@@ -23,14 +23,16 @@ async function Post({ id }: { id: string }) {
     <main className="w-full md:w-[50%] mx-auto">
       <Speak tit={post.title} content={post.content} />
       <p className="text-xs">{post.user_id}</p>
+      <section className="flex gap-2 text-xs ">
+        <p>Created on: {post?.created_at?.slice(0, 10)}</p>
+        <p>Updated on : {post?.updated_at?.slice(0, 10)}</p>
+      </section>
       <h1 className="text-center text-3xl">{post?.title}</h1>
       <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
-      <p>Created on: {post?.created_at?.slice(0, 10)}</p>
-      <p>Updated on : {post?.updated_at?.slice(0, 20)}</p>
-      <div className="my-2 flex gap-2 justify-center items-center">
-        <Button><HandThumbUpIcon className="w-5 h-5" /></Button>
-        <Button><ChatBubbleLeftIcon className="w-5 h-5" /></Button>
-        <Button><ArrowUpTrayIcon className="w-5 h-5" /></Button>
+      <div className="my-2 flex gap-4 justify-center items-center">
+        <button><HandThumbUpIcon className="w-5 h-5" /></button>
+        <button><ChatBubbleLeftIcon className="w-5 h-5" /></button>
+        <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
         <p className="flex items-center"><EyeIcon className="w-5 h-5" /> <span>: {post.views}</span></p>
       </div>
     </main>

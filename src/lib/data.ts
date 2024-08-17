@@ -11,7 +11,7 @@ export async function fetchPost(slug: string) {
     
   } catch (error) {
     console.log('Error fetching single post:', error);
-    throw new Error('Error fetching post');
+    // throw new Error('Error fetching post');
   }
 }
 

@@ -8,6 +8,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
+import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
 
 
 async function Posts({
@@ -36,7 +37,11 @@ async function Posts({
               <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
             </Link>
-            <div className="my-2 flex gap-2 justify-center items-center">
+            <div className="my-2 flex gap-4 justify-center items-center">
+              <button><HandThumbUpIcon className="w-5 h-5" /></button>
+              <button><ChatBubbleLeftIcon className="w-5 h-5" /></button>
+              <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
+              <p className="flex items-center"><EyeIcon className="w-5 h-5" /> <span>: {post.views}</span></p>
             </div>
           </li>
         ))}
