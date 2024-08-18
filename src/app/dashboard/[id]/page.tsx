@@ -1,6 +1,6 @@
 import { PostSkeleton } from "@/components/skeleton";
 import { Button } from "@/components/ui/button";
-import { fetchPost } from "@/lib/data";
+import { fetchComments, fetchPost } from "@/lib/data";
 import type { Post as PostType } from "@/types/custom";
 import { Suspense } from "react";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
@@ -9,6 +9,7 @@ import remarkGfm from 'remark-gfm'
 import Speak from "@/components/speak";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
+import { CreateComment } from "@/components/ui/dashboard/comment";
 
 
 
@@ -35,9 +36,29 @@ async function Post({ id }: { id: string }) {
         <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
         <p className="flex items-center"><EyeIcon className="w-5 h-5" /> <span>: {post.views}</span></p>
       </div>
+      <CreateComment postId={post.id} />
     </main>
   )
 
+}
+
+async function Comments ({id} : {id: string}) {
+  const comments = await fetchComments(id);
+
+  if(!comments){
+    notFound();
+  }
+
+  return(
+    <section className="">
+      {comments.map((comment) => (
+        <div key={comment.id} className="mt-2 border-b-2">
+          <p className="text-xs">{comment.user_id}</p>
+          <p>{comment.content}</p>
+        </div>
+      ))}
+    </section>
+  )
 }
 
 
@@ -47,6 +68,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <Suspense fallback={<PostSkeleton />}>
       <Post id={params.id} />
+      <Comments id={params.id} />
 
     </Suspense>
 
