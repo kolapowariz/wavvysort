@@ -143,3 +143,51 @@ export async function updatePost(postId: string, formData: FormData) {
   revalidatePath('/editor', 'layout');
   redirect('/dashboard/userPosts');
 }
+
+
+const commentSchema = z.object({
+  comment: z.string(),
+})
+
+export async function createComment(postId: string, formData: FormData) {
+  const supabase = createClient();
+
+  const data = commentSchema.parse({
+    comment: formData.get('comment'),
+  })
+
+  if (data.comment === null || data.comment === undefined || data.comment === '') {
+    throw new Error('Comment is required')
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('User is not authenticated')
+  }
+
+  try {
+    const { error } = await supabase.from('comments').insert([
+      {
+        id: crypto.randomUUID(),
+        user_id: user.id,
+        post_id: postId,
+        content: data.comment,
+        created_at: new Date().toUTCString(),
+      },
+    ]);
+  
+    if (error) {
+      console.error('Error inserting comment:', error);
+    }
+    
+  } catch (error) {
+    console.error('Error fetching user:', error)
+    
+  }
+  
+  revalidatePath(`/dashboard/${postId}`);
+  redirect(`/dashboard/${postId}`);
+}
