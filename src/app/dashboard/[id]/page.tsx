@@ -1,7 +1,7 @@
 import { PostSkeleton } from "@/components/skeleton";
 import { Button } from "@/components/ui/button";
 import { fetchComments, fetchPost } from "@/lib/data";
-import type { Post as PostType } from "@/types/custom";
+import type { Post as PostType, Comment as CommentType } from "@/types/custom";
 import { Suspense } from "react";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
 import Markdown from 'react-markdown'
@@ -43,7 +43,7 @@ async function Post({ id }: { id: string }) {
 }
 
 async function Comments ({id} : {id: string}) {
-  const comments = await fetchComments(id);
+  const comments: CommentType[] = await fetchComments(id);
 
   if(!comments){
     notFound();
