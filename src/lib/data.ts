@@ -74,3 +74,24 @@ export async function fetchUserPosts(userId: string) {
     throw new Error('Error fetching user posts');
   }
 }
+
+export async function fetchComments(postId: string) {
+  try {
+    const supabase = createClient();
+    const { data: comments, error } = await supabase
+      .from('comments')
+      .select('*')
+      .eq('post_id', postId)
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.log('Error fetching comments:', error);
+      throw new Error('Error fetching comments');
+    }
+
+    return comments;
+  } catch (error) {
+    console.log('Error fetching comments:', error);
+    throw new Error('Error fetching comments');
+  }
+}
