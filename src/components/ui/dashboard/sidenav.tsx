@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
-import use from '../../../../public/warizz.jpg'
+import use from '../../../../public/nft.jpg'
 import { createClient } from '@/utils/supabase/server';
 import { signOut } from '@/app/login/action';
 import { Button } from '../button';
