@@ -50,7 +50,7 @@ async function Comments ({id} : {id: string}) {
   }
 
   return(
-    <section className="">
+    <section className="w-full md:w-[50%] mx-auto">
       {comments.map((comment) => (
         <div key={comment.id} className="mt-2 border-b-2">
           <p className="text-xs">{comment.user_id}</p>
@@ -64,13 +64,10 @@ async function Comments ({id} : {id: string}) {
 
 export default async function Page({ params }: { params: { id: string } }) {
 
-
   return (
     <Suspense fallback={<PostSkeleton />}>
       <Post id={params.id} />
       <Comments id={params.id} />
-
     </Suspense>
-
   )
 }
