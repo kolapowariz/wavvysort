@@ -46,7 +46,7 @@ export async function fetchPostLikes(postId: string) {
       throw new Error('Error fetching post likes');
     }
 
-    return likes?.length || 0;
+    return likes;
   } catch (error) {
     console.log('Error fetching post likes:', error);
     throw new Error('Error fetching post likes');

@@ -51,7 +51,7 @@ export async function createPost(formData: FormData) {
 }
 
 export async function likePost(userId: string, postId: string) {
-  const supabase = createClient()
+  const supabase = createClient();
 
   try {
     const { data: existingLike, error: fetchError } = await supabase

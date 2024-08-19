@@ -1,6 +1,6 @@
 import Search from "@/components/search";
 import { DashboardSkeleton } from "@/components/skeleton";
-import { fetchFilteredPosts } from "@/lib/data";
+import { fetchComments, fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -9,7 +9,24 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
+import type { Post as PostType, Comment as CommentType } from "@/types/custom";
 
+
+export async function CommentNum ({id} : {id: string}) {
+  const comments: CommentType[] = await fetchComments(id);
+
+  const commentNumbers = comments.length;
+
+  if(!comments){
+    notFound();
+  }
+
+  return(
+    <section >
+    <button className="flex items-center gap-1"><ChatBubbleLeftIcon className="w-5 h-5" /><span>{commentNumbers}</span></button>
+    </section>
+  )
+}
 
 async function Posts({
   searchParams,
@@ -38,7 +55,7 @@ async function Posts({
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
               <div className="my-2 flex gap-4 justify-center items-center">
                 <button><HandThumbUpIcon className="w-5 h-5" /></button>
-                <button><ChatBubbleLeftIcon className="w-5 h-5" /></button>
+                <CommentNum id={post.id} />
                 <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
                 <p className="flex items-center"><EyeIcon className="w-5 h-5" /> <span>: {post.views}</span></p>
               </div>

@@ -10,6 +10,7 @@ import Speak from "@/components/speak";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import { CreateComment } from "@/components/ui/dashboard/comment";
+import { CommentNum } from "../(overview)/page";
 
 
 
@@ -31,10 +32,10 @@ async function Post({ id }: { id: string }) {
       <h1 className="text-center text-3xl">{post?.title}</h1>
       <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
       <div className="my-2 flex gap-4 justify-center items-center">
-        <button><HandThumbUpIcon className="w-5 h-5" /></button>
-        <button><ChatBubbleLeftIcon className="w-5 h-5" /></button>
+        <button className="flex items-center gap-1"><HandThumbUpIcon className="w-5 h-5" /><span>5</span></button>
+        <CommentNum id={post.id} />
         <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
-        <p className="flex items-center"><EyeIcon className="w-5 h-5" /> <span>: {post.views}</span></p>
+        <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p>
       </div>
       <CreateComment postId={post.id} />
     </main>
@@ -44,6 +45,7 @@ async function Post({ id }: { id: string }) {
 
 async function Comments ({id} : {id: string}) {
   const comments: CommentType[] = await fetchComments(id);
+
 
   if(!comments){
     notFound();
