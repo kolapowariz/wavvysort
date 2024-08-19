@@ -10,7 +10,7 @@ import Speak from "@/components/speak";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import { CreateComment } from "@/components/ui/dashboard/comment";
-import { CommentNum } from "../(overview)/page";
+import { CommentNum, LikesNum } from "../(overview)/page";
 
 
 
@@ -32,7 +32,7 @@ async function Post({ id }: { id: string }) {
       <h1 className="text-center text-3xl">{post?.title}</h1>
       <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
       <div className="my-2 flex gap-4 justify-center items-center">
-        <button className="flex items-center gap-1"><HandThumbUpIcon className="w-5 h-5" /><span>5</span></button>
+        <LikesNum id={post.id}/>
         <CommentNum id={post.id} />
         <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
         <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p>

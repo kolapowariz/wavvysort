@@ -1,6 +1,6 @@
 import Search from "@/components/search";
 import { DashboardSkeleton } from "@/components/skeleton";
-import { fetchComments, fetchFilteredPosts } from "@/lib/data";
+import { fetchComments, fetchFilteredPosts, fetchPostLikes } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -9,21 +9,36 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
-import type { Post as PostType, Comment as CommentType } from "@/types/custom";
+import type { Comment as CommentType, Likes as LikesType } from "@/types/custom";
 
 
-export async function CommentNum ({id} : {id: string}) {
+export async function LikesNum({ id }: { id: string }) {
+  const likes: LikesType[] = await fetchPostLikes(id);
+
+  const likesNumbers = likes.length;
+
+  if (!likes) {
+    notFound();
+  }
+
+  return (
+    <section >
+      <button className="flex items-center gap-1"><HandThumbUpIcon className="w-5 h-5" /><span>{likesNumbers}</span></button>
+    </section>
+  )
+}
+export async function CommentNum({ id }: { id: string }) {
   const comments: CommentType[] = await fetchComments(id);
 
   const commentNumbers = comments.length;
 
-  if(!comments){
+  if (!comments) {
     notFound();
   }
 
-  return(
+  return (
     <section >
-    <button className="flex items-center gap-1"><ChatBubbleLeftIcon className="w-5 h-5" /><span>{commentNumbers}</span></button>
+      <button className="flex items-center gap-1"><ChatBubbleLeftIcon className="w-5 h-5" /><span>{commentNumbers}</span></button>
     </section>
   )
 }
@@ -54,10 +69,10 @@ async function Posts({
               <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
               <div className="my-2 flex gap-4 justify-center items-center">
-                <button><HandThumbUpIcon className="w-5 h-5" /></button>
+                <LikesNum id={post.id} />
                 <CommentNum id={post.id} />
                 <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
-                <p className="flex items-center"><EyeIcon className="w-5 h-5" /> <span>: {post.views}</span></p>
+                <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p>
               </div>
             </Link>
           </li>

@@ -38,7 +38,7 @@ export async function fetchPostLikes(postId: string) {
     const supabase = createClient();
     const { data: likes, error } = await supabase
       .from('likes')
-      .select('post_id', { count: 'exact' })
+      .select('*')
       .eq('post_id', postId)
 
     if (error) {
