@@ -1,6 +1,6 @@
 import Search from "@/components/search";
 import { DashboardSkeleton } from "@/components/skeleton";
-import { fetchComments, fetchFilteredPosts, fetchPostLikes } from "@/lib/data";
+import {  fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -9,39 +9,9 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
-import type { Comment as CommentType, Likes as LikesType } from "@/types/custom";
+import { LikesNum } from "@/components/LikesNum";
+import { CommentNum } from "@/components/CommentNum";
 
-
-export async function LikesNum({ id }: { id: string }) {
-  const likes: LikesType[] = await fetchPostLikes(id);
-
-  const likesNumbers = likes.length;
-
-  if (!likes) {
-    notFound();
-  }
-
-  return (
-    <section >
-      <button className="flex items-center gap-1"><HandThumbUpIcon className="w-5 h-5" /><span>{likesNumbers}</span></button>
-    </section>
-  )
-}
-export async function CommentNum({ id }: { id: string }) {
-  const comments: CommentType[] = await fetchComments(id);
-
-  const commentNumbers = comments.length;
-
-  if (!comments) {
-    notFound();
-  }
-
-  return (
-    <section >
-      <button className="flex items-center gap-1"><ChatBubbleLeftIcon className="w-5 h-5" /><span>{commentNumbers}</span></button>
-    </section>
-  )
-}
 
 async function Posts({
   searchParams,

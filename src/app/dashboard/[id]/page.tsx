@@ -10,7 +10,9 @@ import Speak from "@/components/speak";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import { CreateComment } from "@/components/ui/dashboard/comment";
-import { CommentNum, LikesNum } from "../(overview)/page";
+import { LikesNum } from "@/components/LikesNum";
+import { CommentNum } from "@/components/CommentNum";
+
 
 
 
