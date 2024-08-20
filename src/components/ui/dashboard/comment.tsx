@@ -12,7 +12,7 @@ export function CreateComment({ postId }: { postId: string }) {
       await createComment(postId, data);
       formRef.current?.reset();
     }} ref={formRef}>
-      <h1 className='text-center'>Comments</h1>
+      <h1 className='text-center' id='comments'>Comments</h1>
       <input type="text" name="comment" id="comment" className='w-full mt-4 block mx-auto p-2 rounded-md' placeholder='Enter your comment' />
       <Button type="submit" className='mt-4 block mx-auto'>Post</Button>
     </form>

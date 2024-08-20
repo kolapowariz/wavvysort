@@ -29,7 +29,7 @@ async function UserPosts() {
 
   return (
     <div>
-      <h1 className="text-center text-3xl">Posts Written By {user.email}</h1>
+      <h1 className="text-center text-2xl md:text-3xl">Posts Written By {user.email}</h1>
       <ul>
         {posts!.map((post) => (
           <li key={post.id} className=" mt-2 mb-4 border-b-2 md:w-[50%]">

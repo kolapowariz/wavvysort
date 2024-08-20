@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import { CreateComment } from "@/components/ui/dashboard/comment";
 import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
+import ReactMarkdown from 'react-markdown';
 
 
 
@@ -32,7 +33,18 @@ async function Post({ id }: { id: string }) {
         <p>Updated on : {post?.updated_at?.slice(0, 10)}</p>
       </section>
       <h1 className="text-center text-3xl">{post?.title}</h1>
-      <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
+      <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}
+      components={{
+        img: ({ node, ...props }) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            {...props}
+            alt={props.alt || 'Image'} 
+            style={{ maxWidth: '100%' }} 
+          />
+        ),
+      }}
+      >{post.content}</ReactMarkdown>
       <div className="my-2 flex gap-4 justify-center items-center">
         <LikesNum id={post.id}/>
         <CommentNum id={post.id} />

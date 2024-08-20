@@ -8,6 +8,7 @@ import { createPost } from "@/lib/action";
 import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import ReactMarkdown from 'react-markdown';
 
 function onImageUpload(file: Blob) {
   return new Promise(resolve => {

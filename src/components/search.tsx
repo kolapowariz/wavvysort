@@ -11,7 +11,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const handleSearch = useDebouncedCallback((term: string) => {
     // console.log('Searching for:', term);
     
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ?? undefined);
     if(term){
       params.set('query', term);
     } else{
@@ -25,7 +25,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       <input type="text" className="w-full md:w-[30rem] bg-gray-300 p-2 rounded-3xl mb-4 text-center placeholder:text-center mx-auto block dark:text-black" placeholder={placeholder} onChange={e => {
         handleSearch(e.target.value)
       }}
-        defaultValue={searchParams.get('query')?.toString()} />
+        defaultValue={searchParams?.get('query')?.toString()} />
     </div>
   )
 }
