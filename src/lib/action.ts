@@ -52,6 +52,13 @@ export async function createPost(formData: FormData) {
 
 export async function likePost(userId: string, postId: string) {
   const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('User is not authenticated')
+  }
 
   try {
     const { data: existingLike, error: fetchError } = await supabase
@@ -152,6 +159,14 @@ const commentSchema = z.object({
 export async function createComment(postId: string, formData: FormData) {
   const supabase = createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('User is not authenticated')
+  }
+
   const data = commentSchema.parse({
     comment: formData.get('comment'),
   })
@@ -160,13 +175,7 @@ export async function createComment(postId: string, formData: FormData) {
     throw new Error('Comment is required')
   }
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('User is not authenticated')
-  }
+  
 
   try {
     const { error } = await supabase.from('comments').insert([
