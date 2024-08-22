@@ -2,7 +2,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Image from "next/image";
-import nft from '../../public/warizz.jpg';
+import poster from '../../public/poster.jpg';
+import posterTwo from '../../public/posterTwo.webp';
+import posterThree from '../../public/posterThree.png';
+import posterFour from '../../public/posterFour.jpeg';
+import posterFive from '../../public/posterFive.jpg';
+import posterSix from '../../public/posterSix.jpg';
+import posterSeven from '../../public/posterSeven.jpg';
+import posterEight from '../../public/posterEight.jpg';
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Foot from "@/components/Foot";
@@ -85,6 +92,9 @@ export default function LandingPage() {
                                 <p className="text-4xl font-bold">Over <span className="text-blue-400">10,000</span>  Articles Written</p>
                                 <span className="mt-2 text-gray-500 block text-base">By peer-reviewing every article posted on waveSort, you are sure of every post.</span>
                             </div>
+                            <div>
+                                <Image src={posterEight} alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />
+                            </div>
                             <div className="w-64 h-80 bg-[#09233c] rounded-xl mr-2"></div>
                         </section>
                         {/* <section className="bg-[#09233c] mt-24 flex justify-around items-center">
@@ -118,6 +128,18 @@ export default function LandingPage() {
                             <h3 className="text-2xl">What Do Our Users say About Us?</h3>
                             <p>Our 20,000+ customers have only positive things to say about us!
                                 Take a look.</p>
+                        </section>
+                        <section className="flex justify-around items-center gap-2">
+                        <Image src={poster} alt="Poster" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                        <Image src={posterTwo} alt="Poster Two" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                        <Image src={posterThree} alt="Poster Three" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                        </section>
+
+                        
+                        <section className="flex justify-around items-center mt-6 gap-2">
+                        <Image src={posterFive} alt="Poster Five" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                        <Image src={posterSix} alt="Poster Six" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                        <Image src={posterSeven} alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />
                         </section>
                     </main>
                     <Foot />
