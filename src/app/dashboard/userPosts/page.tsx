@@ -30,9 +30,9 @@ async function UserPosts() {
   return (
     <div>
       <h1 className="text-center text-2xl md:text-3xl">Posts Written By {user.email}</h1>
-      <ul>
+      <ul className="md:grid md:grid-cols-2 md:w-[100%]">
         {posts!.map((post) => (
-          <li key={post.id} className=" mt-2 mb-4 border-b-2 md:w-[50%]">
+          <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>

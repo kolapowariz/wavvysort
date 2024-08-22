@@ -9,17 +9,44 @@ const FormSchema = z.object({
   content: z.string(),
 })
 
+export async function uploadImage(file: File) {
+  const supabase = createClient()
+  const { data, error } = await supabase.storage
+    .from('images')
+    .upload(`public/${file.name}`, file)
+
+  if (error) {
+    console.error('Error uploading image:', error)
+    return
+  }
+
+  return data.path
+}
+
+export const getPublicImageUrl = (filePath: string) => {
+  const supabase = createClient()
+  const { data } = supabase.storage.from('images').getPublicUrl(filePath)
+
+  return data.publicUrl
+}
+
 export async function createPost(formData: FormData) {
-  const supabase = createClient();
-  
+  const supabase = createClient()
+
   const data = FormSchema.parse({
     title: formData.get('title'),
     content: formData.get('content'),
   })
-  
+
   const header = data.content.slice(0, 100)
 
-  if (data.title === null || data.title === undefined || data.title === '' && data.content === null || data.content === undefined || data.content === '') {
+  if (
+    data.title === null ||
+    data.title === undefined ||
+    (data.title === '' && data.content === null) ||
+    data.content === undefined ||
+    data.content === ''
+  ) {
     throw new Error('Title and content are required')
   }
 
@@ -30,6 +57,7 @@ export async function createPost(formData: FormData) {
   if (!user) {
     throw new Error('User is not authenticated')
   }
+  // uploadImage(formData.get('content') as File)
 
   const { error } = await supabase.from('posts').insert({
     title: data.title,
@@ -51,7 +79,7 @@ export async function createPost(formData: FormData) {
 }
 
 export async function likePost(userId: string, postId: string) {
-  const supabase = createClient();
+  const supabase = createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -99,12 +127,12 @@ export async function likePost(userId: string, postId: string) {
 export async function deletePost(postId: string) {
   const supabase = createClient()
 
-  try {    
+  try {
     const { error: deleteError } = await supabase
-    .from('posts')
-    .delete()
-    .eq('id', postId)
-    
+      .from('posts')
+      .delete()
+      .eq('id', postId)
+
     if (deleteError) {
       throw new Error('Error deleting post try action')
     }
@@ -116,48 +144,55 @@ export async function deletePost(postId: string) {
 }
 
 export async function updatePost(postId: string, formData: FormData) {
-  const supabase = createClient();
+  const supabase = createClient()
 
   const data = FormSchema.parse({
     title: formData.get('title'),
     content: formData.get('content'),
   })
-  
+
   const header = data.content.slice(0, 100)
 
-  
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
-
-  if (data.title === null || data.title === undefined || data.title === '' && data.content === null || data.content === undefined || data.content === '') {
+  if (
+    data.title === null ||
+    data.title === undefined ||
+    (data.title === '' && data.content === null) ||
+    data.content === undefined ||
+    data.content === ''
+  ) {
     throw new Error('Title and content are required')
   }
 
-  const { error } = await supabase.from('posts').update({
-    title: data.title,
-    content: data.content,
-    header: header,
-    email: user?.email,
-    updated_at: new Date().toUTCString(),
-  }).eq('id', postId).eq('email', user?.email ?? '');
+  const { error } = await supabase
+    .from('posts')
+    .update({
+      title: data.title,
+      content: data.content,
+      header: header,
+      email: user?.email,
+      updated_at: new Date().toUTCString(),
+    })
+    .eq('id', postId)
+    .eq('email', user?.email ?? '')
 
   if (error) {
-    console.log('Error updating post:', error);
+    console.log('Error updating post:', error)
   }
 
-  revalidatePath('/editor', 'layout');
-  redirect('/dashboard/userPosts');
+  revalidatePath('/editor', 'layout')
+  redirect('/dashboard/userPosts')
 }
-
 
 const commentSchema = z.object({
   comment: z.string(),
 })
 
 export async function createComment(postId: string, formData: FormData) {
-  const supabase = createClient();
+  const supabase = createClient()
 
   const {
     data: { user },
@@ -171,11 +206,13 @@ export async function createComment(postId: string, formData: FormData) {
     comment: formData.get('comment'),
   })
 
-  if (data.comment === null || data.comment === undefined || data.comment === '') {
+  if (
+    data.comment === null ||
+    data.comment === undefined ||
+    data.comment === ''
+  ) {
     throw new Error('Comment is required')
   }
-
-  
 
   try {
     const { error } = await supabase.from('comments').insert([
@@ -186,17 +223,15 @@ export async function createComment(postId: string, formData: FormData) {
         content: data.comment,
         created_at: new Date().toUTCString(),
       },
-    ]);
-  
+    ])
+
     if (error) {
-      console.error('Error inserting comment:', error);
+      console.error('Error inserting comment:', error)
     }
-    
   } catch (error) {
     console.error('Error fetching user:', error)
-    
   }
-  
-  revalidatePath(`/dashboard/${postId}`);
-  redirect(`/dashboard/${postId}`);
+
+  revalidatePath(`/dashboard/${postId}`)
+  redirect(`/dashboard/${postId}`)
 }

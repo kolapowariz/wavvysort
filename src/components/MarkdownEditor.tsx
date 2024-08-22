@@ -9,6 +9,11 @@ import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import ReactMarkdown from 'react-markdown';
+import { uploadImage } from "@/lib/action";
+import { getPublicImageUrl } from "@/lib/action";
+import Image from "next/image";
+import { on } from "events";
+
 
 function onImageUpload(file: Blob) {
   return new Promise(resolve => {
@@ -21,6 +26,8 @@ function onImageUpload(file: Blob) {
     reader.readAsDataURL(file);
   });
 }
+
+
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false, loading: () => <Skeleton className="w-[100%] mx-auto h-[75vh]" />
@@ -41,10 +48,26 @@ export default function MarkdownEditor() {
         </div>
         <MdEditor
           style={{ height: "75vh" }}
-          renderHTML={(content) => <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{content}</Markdown>}
+          renderHTML={(content) => <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} components={{
+            img: ({ node, ...props}) => {
+              const imageUrl = getPublicImageUrl(props.src!)
+    
+              console.log('Image URL:', imageUrl);
+              
+    
+              // if(!imageUrl) {
+              //   console.error('Image URL is missing in markdown content');
+              //   return <span className="block mt-2 text-center">Image not available</span>
+              // }
+              return (
+                <Image src={imageUrl} alt={props.alt || 'Image'}  width={700} height={400} loading="lazy"  />
+              )
+            } 
+          }}>{content}</ReactMarkdown>}
           onImageUpload={onImageUpload}
           name="content"
           id="content"
+          
         />
         <Button className="block mt-2 mx-auto">Post</Button>
       </form>

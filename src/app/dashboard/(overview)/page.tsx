@@ -29,10 +29,10 @@ async function Posts({
   }
   return (
     <>
-      <ul>
+      <ul className="md:grid md:grid-cols-2 md:w-[100%]">
 
         {posts.map((post: Post) => (
-          <li key={post.id} className=" mt-2 mb-4 border-b-2 md:w-[50%]">
+          <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post['user_id']}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
