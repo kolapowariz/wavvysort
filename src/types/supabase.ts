@@ -94,6 +94,7 @@ export type Database = {
           email: string | null
           header: string | null
           id: string
+          image: string | null
           title: string
           updated_at: string | null
           user_id: string | null
@@ -105,6 +106,7 @@ export type Database = {
           email?: string | null
           header?: string | null
           id?: string
+          image?: string | null
           title: string
           updated_at?: string | null
           user_id?: string | null
@@ -116,6 +118,7 @@ export type Database = {
           email?: string | null
           header?: string | null
           id?: string
+          image?: string | null
           title?: string
           updated_at?: string | null
           user_id?: string | null

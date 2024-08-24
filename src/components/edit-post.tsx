@@ -38,6 +38,7 @@ export default function EditPost({ post }: { post: PostType }) {
       <MdEditor
         style={{ height: "75vh" }}
         renderHTML={(content) => <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} >{content}</ReactMarkdown>}
+        defaultValue={post.content}
         name="content"
         id="content"
 

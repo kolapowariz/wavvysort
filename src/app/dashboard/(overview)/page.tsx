@@ -13,6 +13,7 @@ import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 
 async function Posts({
@@ -38,7 +39,13 @@ async function Posts({
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post.email}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
-              <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</ReactMarkdown>
+              <section className="md:flex gap-2">
+                <img src={`${post.image}`} className="w-32 h-20 mx-auto md:mx-0 " />
+                {/* <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} className=''>{post.header}</ReactMarkdown> */}
+                <p className="">{post.header?.split('')}</p>
+
+              </section>
+              
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-4 justify-center items-center">

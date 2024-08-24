@@ -10,6 +10,7 @@ import { UserPostsSkeleton } from "@/components/skeleton";
 import { Suspense } from "react";
 import { Post } from "@/types/custom";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 async function UserPosts() {
 
@@ -35,7 +36,11 @@ async function UserPosts() {
           <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
-              <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>
+              <section className="md:flex gap-2">
+                <img src={`${post.image}`} className="w-32 h-20 mx-auto md:mx-0 " />
+                <p className="">{post.header?.split('')}</p>
+
+              </section>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-2 justify-center items-center">

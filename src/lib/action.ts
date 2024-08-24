@@ -30,7 +30,19 @@ export async function createPost(formData: FormData) {
     content: formData.get('content'),
   })
 
-  const header = data.content.slice(0, 200)
+  const oldHeader = data.content;
+  const start = "](";
+  const end = ")";
+  let image = oldHeader.split(start).map((item) => {
+    if (item.includes(end)) {
+      return item.split(end)[0];
+    }
+  }).filter((item) => item !== undefined).join(' ');
+
+// if (image === '' || image === null || image === undefined) {
+//   image = 'https://plus.unsplash.com/premium_photo-1672116453187-3aa64afe04ad?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D'
+// }
+  const header = data.content.slice(0, 50)
 
   if (
     data.title === null ||
@@ -49,7 +61,6 @@ export async function createPost(formData: FormData) {
   if (!user) {
     throw new Error('User is not authenticated')
   }
-  // uploadImage(formData.get('content') as File)
 
   const { error } = await supabase.from('posts').insert({
     title: data.title,
@@ -60,6 +71,7 @@ export async function createPost(formData: FormData) {
     header: header,
     email: user?.email,
     updated_at: new Date().toUTCString(),
+    image: image,
   })
 
   if (error) {
@@ -143,7 +155,16 @@ export async function updatePost(postId: string, formData: FormData) {
     content: formData.get('content'),
   })
 
-  const header = data.content.slice(0, 200)
+  const oldHeader = data.content;
+  const start = "](";
+  const end = ")";
+  let image = oldHeader.split(start).map((item) => {
+    if (item.includes(end)) {
+      return item.split(end)[0];
+    }
+  }).filter((item) => item !== undefined).join(' ');
+
+  const header = data.content.slice(0, 50)
 
   const {
     data: { user },
@@ -167,6 +188,7 @@ export async function updatePost(postId: string, formData: FormData) {
       header: header,
       email: user?.email,
       updated_at: new Date().toUTCString(),
+      image: image,
     })
     .eq('id', postId)
     .eq('email', user?.email ?? '')
