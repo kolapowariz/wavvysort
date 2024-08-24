@@ -9,26 +9,18 @@ const FormSchema = z.object({
   content: z.string(),
 })
 
-export async function uploadImage(file: File) {
+export async function uploadFile(file: File) {
   const supabase = createClient()
-  const { data, error } = await supabase.storage
-    .from('images')
-    .upload(`public/${file.name}`, file)
+
+  const { data, error } = await supabase.storage.from('images').upload(file.name, file)
 
   if (error) {
-    console.error('Error uploading image:', error)
-    return
+    console.error('Error uploading file:', error)
   }
 
-  return data.path
+  return data
 }
 
-export const getPublicImageUrl = (filePath: string) => {
-  const supabase = createClient()
-  const { data } = supabase.storage.from('images').getPublicUrl(filePath)
-
-  return data.publicUrl
-}
 
 export async function createPost(formData: FormData) {
   const supabase = createClient()

@@ -13,8 +13,6 @@ import { CreateComment } from "@/components/ui/dashboard/comment";
 import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import ReactMarkdown from 'react-markdown';
-import Image from "next/image";
-import { getPublicImageUrl } from "@/lib/action";
 
 
 
@@ -36,22 +34,7 @@ async function Post({ id }: { id: string }) {
       </section>
       <h1 className="text-center text-3xl">{post?.title}</h1>
       <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}
-      components={{
-        img: ({ node, ...props}) => {
-          const imageUrl = getPublicImageUrl(props.src!)
-
-          console.log('Image URL:', imageUrl);
-          
-
-          // if(!imageUrl) {
-          //   console.error('Image URL is missing in markdown content');
-          //   return <span className="block mt-2 text-center">Image not available</span>
-          // }
-          return (
-            <Image src={imageUrl} alt={props.alt || 'Image'}  width={700} height={400} loading="lazy"  />
-          )
-        }
-      }}
+      
       >{post.content}</ReactMarkdown>
       <div className="my-2 flex gap-4 justify-center items-center">
         <LikesNum id={post.id}/>
