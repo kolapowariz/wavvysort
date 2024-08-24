@@ -40,13 +40,13 @@ async function Posts({
               <p className="text-xs">{post.email}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
-                <img src={`${post.image}`} className="w-32 h-20 mx-auto md:mx-0 " />
+                <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " />
                 {/* <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} className=''>{post.header}</ReactMarkdown> */}
                 <p className="">{post.header?.split('')}</p>
 
               </section>
               
-              <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
+              <p className="text-xs mt-2">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-4 justify-center items-center">
               <LikesNum id={post.id} />

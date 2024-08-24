@@ -37,7 +37,7 @@ async function UserPosts() {
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
-                <img src={`${post.image}`} className="w-32 h-20 mx-auto md:mx-0 " />
+                <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " />
                 <p className="">{post.header?.split('')}</p>
 
               </section>
