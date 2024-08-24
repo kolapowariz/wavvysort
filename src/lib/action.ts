@@ -30,7 +30,7 @@ export async function createPost(formData: FormData) {
     content: formData.get('content'),
   })
 
-  const header = data.content.slice(0, 100)
+  const header = data.content.slice(0, 200)
 
   if (
     data.title === null ||
@@ -143,7 +143,7 @@ export async function updatePost(postId: string, formData: FormData) {
     content: formData.get('content'),
   })
 
-  const header = data.content.slice(0, 100)
+  const header = data.content.slice(0, 200)
 
   const {
     data: { user },

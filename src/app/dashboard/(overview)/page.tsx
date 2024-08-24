@@ -11,6 +11,8 @@ import { notFound } from "next/navigation";
 import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
+import CopyLinkButton from "@/components/copy";
+import ReactMarkdown from "react-markdown";
 
 
 async function Posts({
@@ -34,9 +36,9 @@ async function Posts({
         {posts.map((post: Post) => (
           <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
-              <p className="text-xs">{post['user_id']}</p>
+              <p className="text-xs">{post.email}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
-              <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</Markdown>
+              <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{post.header}</ReactMarkdown>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-4 justify-center items-center">
@@ -45,7 +47,7 @@ async function Posts({
                 <CommentNum id={post.id} />
 
               </Link>
-              <button><ArrowUpTrayIcon className="w-5 h-5" /></button>
+              <CopyLinkButton />
               <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p>
             </div>
           </li>

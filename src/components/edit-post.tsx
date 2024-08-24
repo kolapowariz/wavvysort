@@ -18,18 +18,8 @@ import { Skeleton } from './ui/skeleton';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown';
 
-function onImageUpload(file: Blob) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-    reader.onload = data => {
-      if (data.target) {
-        resolve(data.target.result);
-      }
-    };
-    reader.readAsDataURL(file);
-  });
-}
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false, loading: () => <Skeleton className="w-[100%] mx-auto h-[75vh]" />
@@ -47,11 +37,10 @@ export default function EditPost({ post }: { post: PostType }) {
       </div>
       <MdEditor
         style={{ height: "75vh" }}
-        renderHTML={(content) => <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>{content}</Markdown>}
-        onImageUpload={onImageUpload}
+        renderHTML={(content) => <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} >{content}</ReactMarkdown>}
         name="content"
         id="content"
-        defaultValue={post.content}
+
       />
       <div className="mt-6 flex justify-end gap-4">
         <Link
