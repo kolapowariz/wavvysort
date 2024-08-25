@@ -1,7 +1,7 @@
 'use client';
 import dynamic from "next/dynamic";
 import "react-markdown-editor-lite/lib/index.css";
-import { useRef} from "react";
+import { useRef } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { createPost, uploadFile } from "@/lib/action";
@@ -9,7 +9,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import ReactMarkdown from 'react-markdown';
-import Image from "next/image";
+import { toast } from "sonner";
 
 
 
@@ -30,6 +30,9 @@ export default function MarkdownEditor() {
       <form action={async (data) => {
         await createPost(data);
         formRef.current?.reset();
+        toast("Your post has been created successfully on", {
+          description: `${new Date().toUTCString()}`,
+        });
       }} ref={formRef}>
         <div className="mb-4 mx-auto">
           <input type="text" id="title" name="title" required placeholder="Title" className="block mx-auto w-[20rem] p-2 rounded-md placeholder:text-center dark:text-black bg-gray-200" />
@@ -41,7 +44,7 @@ export default function MarkdownEditor() {
           onChange={handleEditorChange}
           name="content"
           id="content"
-          
+
         />
         <Button className="block mt-2 mx-auto">Post</Button>
       </form>
@@ -195,8 +198,8 @@ export default function MarkdownEditor() {
 //               },
 //               imageUrl: 'https://octodex.github.com/images/minion.png'
 //             }}
-//             onChange={this.handleEditorChange} 
-//           />  
+//             onChange={this.handleEditorChange}
+//           />
 //         </div> */}
 //       </div>
 //     );
