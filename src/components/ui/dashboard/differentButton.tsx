@@ -32,7 +32,8 @@ export function DeletePost({ id }: { id: string }) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deletePostWithId}>
-            <Button type="submit" >Delete
+          {/* <AlertDialogAction>Delete</AlertDialogAction> */}
+            <Button className='w-full' type="submit" >Delete
               <span className="sr-only">Delete</span>
             </Button>
 
