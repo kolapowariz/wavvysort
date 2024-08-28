@@ -36,11 +36,11 @@ async function Post({ id }: { id: string }) {
       <h1 className="text-center text-3xl">{post?.title}</h1>
       <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} className='block mx-auto p-2 md:block md:mx-auto'>{post.content}</ReactMarkdown>
       <div className="my-2 flex gap-4 justify-center items-center">
-        <LikesNum id={post.id}/>
+        {/* <LikesNum id={post.id}/> */}
         <CommentNum id={post.id} />
         <CopyLinkButton />
         
-        <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p>
+        {/* <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p> */}
         
       </div>
       <CreateComment postId={post.id} />

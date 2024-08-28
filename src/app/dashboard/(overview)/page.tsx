@@ -49,13 +49,13 @@ async function Posts({
               <p className="text-xs mt-2">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-4 justify-center items-center">
-              <LikesNum id={post.id} />
+              {/* <LikesNum id={post.id} /> */}
               <Link href={`/dashboard/${post.id}#comments`}>
                 <CommentNum id={post.id} />
 
               </Link>
               <CopyLinkButton />
-              <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p>
+              {/* <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p> */}
             </div>
           </li>
         ))}
