@@ -4,16 +4,10 @@ import { fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Link from "next/link";
 import { Suspense } from "react";
-import Markdown from 'react-markdown'
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
-import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
-import ReactMarkdown from "react-markdown";
-import Image from "next/image";
 
 
 async function Posts({
@@ -37,7 +31,7 @@ async function Posts({
         {posts.map((post: Post) => (
           <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
-              <p className="text-xs">{post.email}</p>
+              <p className="text-xs">{post.user_id}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
                 <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " />

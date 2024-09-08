@@ -1,10 +1,7 @@
 import { PostSkeleton } from "@/components/skeleton";
-import { Button } from "@/components/ui/button";
 import { fetchComments, fetchPost } from "@/lib/data";
 import type { Post as PostType, Comment as CommentType } from "@/types/custom";
 import { Suspense } from "react";
-import { HandThumbUpIcon, ChatBubbleLeftIcon, ArrowUpTrayIcon, EyeIcon } from '@heroicons/react/24/outline'
-import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Speak from "@/components/speak";
 import rehypeHighlight from "rehype-highlight";
@@ -28,7 +25,7 @@ async function Post({ id }: { id: string }) {
   return (
     <main className="w-full md:w-[50%] mx-auto">
       <Speak tit={post.title} content={post.content} />
-      <p className="text-xs">{post.email}</p>
+      <p className="text-xs">{post.user_id}</p>
       <section className="flex gap-2 text-xs ">
         <p>Created on: {post?.created_at?.slice(0, 10)}</p>
         <p>Updated on : {post?.updated_at?.slice(0, 10)}</p>
