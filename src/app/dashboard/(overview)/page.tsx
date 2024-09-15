@@ -8,6 +8,10 @@ import { notFound } from "next/navigation";
 import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
+import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 
 async function Posts({
@@ -34,7 +38,8 @@ async function Posts({
               <p className="text-xs">{post.user_id}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
-                <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " />
+                <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" />
+
                 {/* <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} className=''>{post.header}</ReactMarkdown> */}
                 <p className="">{post.header?.split('')}</p>
 

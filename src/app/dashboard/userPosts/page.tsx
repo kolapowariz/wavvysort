@@ -11,6 +11,7 @@ import { Suspense } from "react";
 import { Post } from "@/types/custom";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 async function UserPosts() {
 
@@ -37,7 +38,10 @@ async function UserPosts() {
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
-                <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " />
+                <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" />
+
+                
+                {/* <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" /> */}
                 <p className="">{post.header?.split('')}</p>
 
               </section>

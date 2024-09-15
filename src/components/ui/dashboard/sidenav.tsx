@@ -14,6 +14,7 @@ import use from '../../../../public/nft.jpg'
 import { createClient } from '@/utils/supabase/server';
 import { signOut } from '@/app/login/action';
 import { Button } from '../button';
+import { ChangeEvent } from 'react';
 
 export default async function SideNav() {
   const supabase = await createClient();
@@ -32,7 +33,9 @@ export default async function SideNav() {
       <div className="flex grow md:grow-0  justify-around space-x-2 md:flex ">
         <NavLinks />
         <DropdownMenu>
-          <DropdownMenuTrigger><Image src={use} width={50} height={50} alt="User Image" priority className="rounded-full border-none" /></DropdownMenuTrigger>
+          <DropdownMenuTrigger>
+            <p>{user?.email}</p>
+          </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>

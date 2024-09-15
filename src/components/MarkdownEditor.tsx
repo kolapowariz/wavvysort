@@ -1,7 +1,7 @@
 'use client';
 import dynamic from "next/dynamic";
 import "react-markdown-editor-lite/lib/index.css";
-import { useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { createPost, uploadFile } from "@/lib/action";
@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import ReactMarkdown from 'react-markdown';
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabaseClient";
 
 
 
@@ -17,6 +18,24 @@ const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false, loading: () => <Skeleton className="w-[100%] mx-auto h-[75vh]" />
 });
 
+export const handleImageUpload = async (file: File) => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Math.random()}.${fileExt}`;
+  const filePath = `${fileName}`;
+  
+  let { error } = await supabase.storage.from('images').upload(filePath, file);
+
+  if (error) {
+    throw error;
+  }
+
+  const { data: url} = await supabase.storage.from('images').getPublicUrl(filePath);
+
+  console.log(url);
+  return url.publicUrl;
+
+
+};
 
 export default function MarkdownEditor() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -40,7 +59,7 @@ export default function MarkdownEditor() {
         <MdEditor
           style={{ height: "75vh" }}
           renderHTML={(content) => <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} >{content}</ReactMarkdown>}
-          // onImageUpload={uploadFile}
+          onImageUpload={handleImageUpload}
           onChange={handleEditorChange}
           name="content"
           id="content"
