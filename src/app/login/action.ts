@@ -93,7 +93,7 @@ export async function signup(formData: FormData) {
     return redirect('/signup?message=Error retrieving user information')
   }
 
-  const { error: insertError } = await supabase.from('users').insert([{ email: data.email, id: userId}])
+  const { error: insertError } = await supabase.from('users').insert([{ email: data.email, id: userId, username: null }])
   
 
   if(insertError){

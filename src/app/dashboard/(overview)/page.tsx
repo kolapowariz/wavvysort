@@ -9,9 +9,6 @@ import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import rehypeHighlight from "rehype-highlight";
-import remarkGfm from "remark-gfm";
 
 
 async function Posts({
@@ -30,21 +27,17 @@ async function Posts({
   }
   return (
     <>
-      <ul className="md:grid md:grid-cols-2 md:w-[100%]">
+      <ul className="md:w-[40%] mx-auto border">
 
         {posts.map((post: Post) => (
-          <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
+          <li key={post.id} className="md:w-[100%] xl:w-[90%] mt-2 mb-4 mx-auto border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post.user_id}</p>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
-                <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" />
-
-                {/* <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} className=''>{post.header}</ReactMarkdown> */}
+                <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md " alt="Uplaoded Image" />
                 <p className="">{post.header?.split('')}</p>
-
               </section>
-              
               <p className="text-xs mt-2">{post['created_at']?.slice(0, 10)}</p>
             </Link>
             <div className="my-2 flex gap-4 justify-center items-center">

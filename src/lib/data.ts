@@ -33,6 +33,26 @@ export async function fetchFilteredPosts(query: string) {
   }
 }
 
+export async function fetchUserProfile(userId: string) {
+  try {
+    const supabase = createClient();
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', userId)
+
+    if (error) {
+      console.log('Error fetching user profile:', error);
+      throw new Error('Error fetching user profile');
+    }
+
+    return user;
+  } catch (error) {
+    console.log('Error fetching user profile:', error);
+    throw new Error('Error fetching user profile');
+  }
+}
+
 export async function fetchPostLikes(postId: string) {
   try {
     const supabase = createClient();

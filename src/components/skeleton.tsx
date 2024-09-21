@@ -2,8 +2,8 @@ import { Skeleton } from "./ui/skeleton";
 
 export function DashboardSkeleton() {
   return (
-    <section className="md:grid md:grid-cols-2 md:w-[100%]">
-      <div className="md:w-[95%]">
+    <section className=" md:w-[100%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -19,7 +19,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -35,7 +35,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -51,7 +51,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -67,7 +67,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -83,7 +83,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -99,7 +99,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />
@@ -115,7 +115,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      <div className="md:w-[95%]">
+      <div className="md:w-[50%] xl:w-[40%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
             <Skeleton className=" h-4 w-[240px] bg-white dark:bg-current" />

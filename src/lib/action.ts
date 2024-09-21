@@ -9,17 +9,18 @@ const FormSchema = z.object({
   content: z.string(),
 })
 
-export async function uploadFile(file: File) {
-  const supabase = createClient()
+const ProfileSchema = z.object({
+  username: z.string(),
+  bio: z.string(),
+  avatar_url: z.string(),
+})
 
-  const { data, error } = await supabase.storage.from('images').upload(file.name, file)
+export async function createProfile(formData: FormData) {
+  const supabase = createClient();
 
-  if (error) {
-    console.error('Error uploading file:', error)
-  }
 
-  return data
 }
+
 
 
 export async function createPost(formData: FormData) {

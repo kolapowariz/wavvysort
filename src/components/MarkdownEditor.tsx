@@ -4,7 +4,7 @@ import "react-markdown-editor-lite/lib/index.css";
 import { ChangeEvent, useRef } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { createPost, uploadFile } from "@/lib/action";
+import { createPost } from "@/lib/action";
 import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";

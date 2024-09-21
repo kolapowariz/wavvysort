@@ -13,8 +13,9 @@ import Image from "next/image"
 import use from '../../../../public/nft.jpg'
 import { createClient } from '@/utils/supabase/server';
 import { signOut } from '@/app/login/action';
-import { Button } from '../button';
-import { ChangeEvent } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+
 
 export default async function SideNav() {
   const supabase = await createClient();
@@ -34,16 +35,18 @@ export default async function SideNav() {
         <NavLinks />
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <p>{user?.email}</p>
+            <Avatar>
+                {/* <AvatarImage src={user?.avatar_url} alt={user?.full_name} /> */}
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            {/* <p>{user?.email}</p> */}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <button>
-                <Link href='/dashboard/profile'>Profile</Link>
-              </button>
+              <Link href='/dashboard/profile'>Profile</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>Billing</DropdownMenuItem>
             <DropdownMenuItem>Team</DropdownMenuItem>
