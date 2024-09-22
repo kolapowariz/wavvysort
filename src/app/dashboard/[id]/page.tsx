@@ -11,10 +11,6 @@ import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import ReactMarkdown from 'react-markdown';
 import CopyLinkButton from "@/components/copy";
-// import  from 'markdown-it'
-
-
-
 
 
 async function Post({ id }: { id: string }) {
@@ -32,6 +28,7 @@ async function Post({ id }: { id: string }) {
         <p>Updated on : {post?.updated_at?.slice(0, 10)}</p>
       </section>
       <h1 className="text-center text-3xl">{post?.title}</h1>
+      {/* <p>{result}</p> */}
       <ReactMarkdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]} className='block mx-auto p-2 md:block md:mx-auto'>{post.content}</ReactMarkdown>
       <div className="my-2 flex gap-4 justify-center items-center">
         {/* <LikesNum id={post.id}/> */}

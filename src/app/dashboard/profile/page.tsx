@@ -4,6 +4,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import type { User } from "@/types/custom";
 import { SheetSide } from "@/components/ui/dashboard/sheeter";
+import UserPost from "./userPosts/page";
+
 
 
 export default async function Profile() {
@@ -31,6 +33,7 @@ export default async function Profile() {
       </ul>
       {/* <Image src={user?.avatar_url} alt={user?.full_name} width={100} height={100} /> */}
       <SheetSide />
+      <UserPost />
 
     </div>
   );

@@ -199,7 +199,7 @@ export async function updatePost(postId: string, formData: FormData) {
   }
 
   revalidatePath('/editor', 'layout')
-  redirect('/dashboard/userPosts')
+  redirect('/dashboard/profile')
 }
 
 const commentSchema = z.object({

@@ -53,7 +53,7 @@ export function DeletePost({ id }: { id: string }) {
 export function UpdatePost({ id }: { id: string }) {
   return (
     <Link
-      href={`/dashboard/userPosts/${id}/edit`}
+      href={`/dashboard/profile/userPosts/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
