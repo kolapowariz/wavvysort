@@ -33,7 +33,7 @@ async function Posts({
           <li key={post.id} className="md:w-[100%] xl:w-[90%] mt-2 mb-4 mx-auto border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post.user_id}</p>
-              <h2 className="text-lg md:text-xl">{post.title}</h2>
+              <h2 className="text-lg md:text-xl font-bold">{post.title}</h2>
               <section className="md:flex gap-2">
                 <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md " alt="Uplaoded Image" />
                 <p className="">{post.header?.split('')}</p>

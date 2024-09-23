@@ -53,7 +53,6 @@ export default async function SideNav() {
               <div>
                 {user !== null ? (
                   <form action={signOut}>
-                    {/* <p>{user.email}</p> */}
                     <button className="flex gap-2">
                       <div className="">Sign Out</div>
                       <PowerIcon className="w-4" />

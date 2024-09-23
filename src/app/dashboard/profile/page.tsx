@@ -22,17 +22,22 @@ export default async function Profile() {
   // get public url for image.
   return (
     <div>
-      <h1>Profile</h1>
+      <h1 className="text-5xl text-center">Profile</h1>
+
+      <section className="flex my-4 justify-between">
       <ul>
         {profiles!.map((profile) => (
           <li key={profile.id}>
             <p>{profile.email}</p>
             <p>{profile.username}</p>
+            {/* <p>{profile.bio}</p> */}
+            {/* <p>{profile.fullname}</p> */}
+            {/* <Image src={profile?.avatar_url} alt={profile?.full_name} width={100} height={100} /> */}
           </li>
         ))}
       </ul>
-      {/* <Image src={user?.avatar_url} alt={user?.full_name} width={100} height={100} /> */}
       <SheetSide />
+      </section>
       <UserPost />
 
     </div>

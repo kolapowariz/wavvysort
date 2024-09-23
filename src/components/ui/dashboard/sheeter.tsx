@@ -38,19 +38,27 @@ export function SheetSide() {
                 <Label htmlFor="name" className="text-right">
                   Name
                 </Label>
-                <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                <Input id="name" value="Pedro Duarte" readOnly className="col-span-3" />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="username" className="text-right">
                   Username
                 </Label>
-                <Input id="username" value="@peduarte" className="col-span-3" />
+                <Input id="username" value="@peduarte" readOnly className="col-span-3" />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="bio" className="text-right">
                   Bio
                 </Label>
-                <Input id="bio" value="I am a Technical writter" className="col-span-3" />
+                <Input id="bio" value="I am a Technical writter" className="col-span-3" readOnly />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="profile-image" className="text-right">
+                  Profile Image
+                </Label>
+                <input type="image" src="" alt="" className="border"/>
+                <input type="file" name="" id="" className="border"/>
+                {/* <Input type="file" id="profile-image" value="I am a Technical writter" className="col-span-3" /> */}
               </div>
             </div>
             <SheetFooter>
