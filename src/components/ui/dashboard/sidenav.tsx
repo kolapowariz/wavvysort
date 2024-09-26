@@ -13,13 +13,31 @@ import Image from "next/image"
 import { createClient } from '@/utils/supabase/server';
 import { signOut } from '@/app/login/action';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import type { User } from "@/types/custom";
+import { fetchUserProfile } from "@/lib/data";
+import { profile } from 'console';
 
 
 
 export default async function SideNav() {
   const supabase = await createClient();
 
+
   const { data: { user } } = await supabase.auth.getUser();
+
+
+  let profiles: User[] = [];
+  if (user) {
+    profiles = await fetchUserProfile(user.id) as unknown as User[];
+  }
+
+  const mapProfile = profiles.map((profile) => (
+    <li key={profile.id}>
+      <p>{profile.firstname?.slice(0, 1)} {profile.lastname?.slice(0, 1)}</p>
+    </li>
+  ));
+
+
   return (
     <div className="flex justify-between md:justify-between gap-4 px-2 py-2 md:gap-20 md:px-6">
       <Link
@@ -36,7 +54,7 @@ export default async function SideNav() {
           <DropdownMenuTrigger>
             <Avatar>
                 {/* <AvatarImage src={user?.avatar_url} alt={user?.full_name} /> */}
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>{mapProfile}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>

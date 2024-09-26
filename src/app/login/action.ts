@@ -78,6 +78,8 @@ export async function signup(formData: FormData) {
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
+    firstname: formData.get('firstname') as string,
+    lastname: formData.get('lastname') as string,
   }
 
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp(data)
@@ -93,7 +95,7 @@ export async function signup(formData: FormData) {
     return redirect('/signup?message=Error retrieving user information')
   }
 
-  const { error: insertError } = await supabase.from('users').insert([{ email: data.email, id: userId, username: null }])
+  const { error: insertError } = await supabase.from('users').insert([{ email: data.email, id: userId, username: null, firstname: data.firstname, lastname: data.lastname }])
   
 
   if(insertError){

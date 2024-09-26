@@ -30,8 +30,8 @@ export default async function Profile() {
           <li key={profile.id}>
             <p>{profile.email}</p>
             <p>{profile.username}</p>
+            <p>{profile.firstname} {profile.lastname}</p>
             {/* <p>{profile.bio}</p> */}
-            {/* <p>{profile.fullname}</p> */}
             {/* <Image src={profile?.avatar_url} alt={profile?.full_name} width={100} height={100} /> */}
           </li>
         ))}
