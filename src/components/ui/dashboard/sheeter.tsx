@@ -1,5 +1,6 @@
 "use client"
 
+import { handleImageUpload } from "@/components/MarkdownEditor"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -13,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import Image from "next/image"
 
 const SHEET_SIDES = ["right"] as const
 
@@ -56,9 +58,12 @@ export function SheetSide() {
                 <Label htmlFor="profile-image" className="text-right">
                   Profile Image
                 </Label>
-                <input type="image" src="" alt="" className="border"/>
-                <input type="file" name="" id="" className="border"/>
-                {/* <Input type="file" id="profile-image" value="I am a Technical writter" className="col-span-3" /> */}
+                <Image src="/warizz.jpg" width={200} height={200} alt="Profile image" className="rounded-full" />
+                <input type="file" name="" id="" className="border" onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    handleImageUpload(e.target.files[0]);
+                  }
+                }}/>
               </div>
             </div>
             <SheetFooter>

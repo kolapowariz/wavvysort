@@ -52,10 +52,12 @@ export default async function SideNav() {
         <NavLinks />
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Avatar>
+            {profiles.map(profile => (
+              <Avatar key={profile.id}>
                 {/* <AvatarImage src={user?.avatar_url} alt={user?.full_name} /> */}
-              <AvatarFallback>{mapProfile}</AvatarFallback>
-            </Avatar>
+                <AvatarFallback>{profile.firstname?.slice(0, 1)} {profile.lastname?.slice(0, 1)}</AvatarFallback>
+              </Avatar>
+            ))}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>

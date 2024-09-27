@@ -1,4 +1,5 @@
 'use server'
+import { handleImageUpload } from '@/components/MarkdownEditor'
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -34,6 +35,9 @@ export async function createPost(formData: FormData) {
   const oldHeader = data.content;
   const start = "](";
   const end = ")";
+
+  // Extract image from content in another way like getPublicUrl
+
   let image = oldHeader.split(start).map((item) => {
     if (item.includes(end)) {
       return item.split(end)[0];

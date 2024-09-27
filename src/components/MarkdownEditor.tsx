@@ -31,7 +31,7 @@ export const handleImageUpload = async (file: File) => {
 
   const { data: url} = await supabase.storage.from('images').getPublicUrl(filePath);
 
-  console.log(url);
+  console.log(url.publicUrl);
   return url.publicUrl;
 
 
