@@ -22,7 +22,7 @@ type SheetSide = (typeof SHEET_SIDES)[number]
 
 export function SheetSide() {
   return (
-    <div className="">
+    <div className="text-right">
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>

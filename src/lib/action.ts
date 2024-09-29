@@ -38,6 +38,12 @@ export async function createPost(formData: FormData) {
 
   // Extract image from content in another way like getPublicUrl
 
+  // const file = formData.get('file') as File;
+  // if (!file) {
+  //   throw new Error('File is required');
+  // }
+  // let image = await handleImageUpload(file);
+
   let image = oldHeader.split(start).map((item) => {
     if (item.includes(end)) {
       return item.split(end)[0];

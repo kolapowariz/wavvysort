@@ -20,7 +20,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
   return (
-    <div>
+    <div className="mt-16 md:mt-20">
       <label htmlFor="search" className="sr-only">Search</label>
       <input type="text" className="w-full md:w-[30rem] bg-gray-300 p-2 rounded-3xl mb-4 text-center placeholder:text-center mx-auto block dark:text-black" placeholder={placeholder} onChange={e => {
         handleSearch(e.target.value)

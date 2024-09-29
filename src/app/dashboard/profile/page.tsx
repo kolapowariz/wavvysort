@@ -21,22 +21,22 @@ export default async function Profile() {
 
   // get public url for image.
   return (
-    <div>
+    <div className="mt-14">
       <h1 className="text-5xl text-center">Profile</h1>
 
-      <section className="flex my-4 justify-between">
-      <ul>
-        {profiles!.map((profile) => (
-          <li key={profile.id}>
-            <p>{profile.email}</p>
-            <p>{profile.username}</p>
-            <p>{profile.firstname} {profile.lastname}</p>
-            {/* <p>{profile.bio}</p> */}
-            {/* <Image src={profile?.avatar_url} alt={profile?.full_name} width={100} height={100} /> */}
-          </li>
-        ))}
-      </ul>
-      <SheetSide />
+      <section className="md:flex my-4 justify-between md:w-[70%] mx-auto border">
+        <SheetSide />
+        <ul className="text">
+          {profiles!.map((profile) => (
+            <li key={profile.id}>
+              <p>{profile.email}</p>
+              <p>{profile.username}</p>
+              <p>{profile.firstname} {profile.lastname}</p>
+              {/* <p>{profile.bio}</p> */}
+              <Image src='/warizz.jpg' alt="Wariz" width={400} height={500} className="rounded-full mx-auto text-center block" />
+            </li>
+          ))}
+        </ul>
       </section>
       <UserPost />
 

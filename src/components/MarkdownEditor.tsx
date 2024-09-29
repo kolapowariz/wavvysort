@@ -52,8 +52,8 @@ export default function MarkdownEditor() {
         toast("Your post has been created successfully on", {
           description: `${new Date().toUTCString()}`,
         });
-      }} ref={formRef}>
-        <div className="mb-4 mx-auto">
+      }} ref={formRef} className="">
+        <div className="mb-4 mx-auto mt-20">
           <input type="text" id="title" name="title" required placeholder="Title" className="block mx-auto w-[20rem] p-2 rounded-md placeholder:text-center dark:text-black bg-gray-200" />
         </div>
         <MdEditor

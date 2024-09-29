@@ -27,7 +27,7 @@ async function Posts({
   }
   return (
     <>
-      <ul className="md:w-[40%] mx-auto border">
+      <ul className="md:w-[40%] mx-auto md:border md:rounded-md">
 
         {posts.map((post: Post) => (
           <li key={post.id} className="md:w-[100%] xl:w-[90%] mt-2 mb-4 mx-auto border-b-2">
