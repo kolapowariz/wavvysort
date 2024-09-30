@@ -20,7 +20,7 @@ async function Post({ id }: { id: string }) {
   }
 
   return (
-    <main className="w-full md:w-[50%] mx-auto">
+    <main className="w-full md:w-[50%] mx-auto mt-14 md:mt-20">
       <Speak tit={post.title} content={post.content} />
       <p className="text-xs">{post.user_id}</p>
       <section className="flex gap-2 text-xs ">

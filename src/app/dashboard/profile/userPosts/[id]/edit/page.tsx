@@ -12,7 +12,7 @@ export default async function Page ( {params} : {params: {id : string}} ) {
   }
   return(
     <main>
-      <h1>Edit Your Post</h1>
+      <h1 className="mt-14 text-center mb-4 md:mt-20">Edit Your Post</h1>
       {post && <EditPost post={post} />}
     </main>
   )
