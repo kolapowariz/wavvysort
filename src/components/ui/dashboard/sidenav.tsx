@@ -38,7 +38,7 @@ export default async function SideNav() {
 
 
   return (
-    <div className="flex justify-between md:justify-between gap-4 px-2 py-2 md:gap-20 md:px-6 fixed w-full mb-20 bg-inherit">
+    <div className="flex justify-between md:justify-between gap-4 px-2 py-2 md:gap-20 md:px-6 fixed w-full mb-20 bg-gray-300 dark:bg-[#020818]">
       <Link
         className="h-18 rounded-md bg-gray-600 p-2 md:h-20"
         href="/"

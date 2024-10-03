@@ -21,7 +21,7 @@ export default async function Profile() {
 
   // get public url for image.
   return (
-    <div className="mt-14">
+    <div className="mt-20">
       <h1 className="text-5xl text-center">Profile</h1>
 
       <section className="md:flex my-4 justify-between md:w-[70%] mx-auto border">

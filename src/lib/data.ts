@@ -33,6 +33,21 @@ export async function fetchFilteredPosts(query: string) {
   }
 }
 
+export async function fetchDesendingPosts() {
+  try {
+    const supabase = createClient();
+    const { data: posts, error } = await supabase.from('posts').select('*').order('created_at', {ascending: true}).limit(3);
+    if (error) {
+      throw new Error('Error fetching posts');
+    }
+    return posts;
+    
+  } catch (error) {
+    console.log('Error fetching posts:', error);
+    throw new Error('Error fetching posts');
+  }
+}
+
 export async function fetchUserProfile(userId: string) {
   try {
     const supabase = createClient();
