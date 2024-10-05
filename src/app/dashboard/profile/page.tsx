@@ -18,6 +18,7 @@ export default async function Profile() {
   }
 
   const profiles: User[] = await fetchUserProfile(user.id) as unknown as User[];
+  const [userProfile] = await Promise.all([fetchUserProfile(user.id)]);
 
   // get public url for image.
   return (
@@ -30,10 +31,9 @@ export default async function Profile() {
           {profiles!.map((profile) => (
             <li key={profile.id}>
               <p>{profile.email}</p>
-              <p>{profile.username}</p>
+              <p>{profile.bio}</p>
               <p>{profile.firstname} {profile.lastname}</p>
-              {/* <p>{profile.bio}</p> */}
-              <Image src='/warizz.jpg' alt="Wariz" width={400} height={500} className="rounded-full mx-auto text-center block" />
+              <Image src={profile.avatar_url ?? '/nft.jpg'} alt={profile.firstname!} width={400} height={500} className="rounded-full mx-auto text-center block" />
             </li>
           ))}
         </ul>

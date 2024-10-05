@@ -99,6 +99,9 @@ export type Database = {
           updated_at: string | null
           user_id: string | null
           views: number | null
+          firstname: string | null
+          lastname: string | null
+          avatar: string | null
         }
         Insert: {
           content: string
@@ -111,6 +114,9 @@ export type Database = {
           updated_at?: string | null
           user_id?: string | null
           views?: number | null
+          firstname: string | null
+          lastname: string | null
+          avatar: string | null
         }
         Update: {
           content?: string
@@ -123,6 +129,9 @@ export type Database = {
           updated_at?: string | null
           user_id?: string | null
           views?: number | null
+          firstname: string | null
+          lastname: string | null
+          avatar: string | null
         }
         Relationships: [
           {
@@ -140,27 +149,30 @@ export type Database = {
           email: string
           id: string
           updated_at: string | null
-          username: string | null
+          bio: string | null
           firstname: string | null
           lastname: string | null
+          avatar_url: string | null
         }
         Insert: {
           created_at?: string | null
           email: string
-          id?: string
+          id: string
           updated_at?: string | null
-          username: string | null
+          bio: string | null
           firstname: string | null
           lastname: string | null
+          avatar_url: string | null
         }
         Update: {
           created_at?: string | null
           email?: string
-          id?: string
+          id: string
           updated_at?: string | null
-          username: string | null
+          bio: string | null
           firstname: string | null
           lastname: string | null
+          avatar_url: string | null
         }
         Relationships: []
       }

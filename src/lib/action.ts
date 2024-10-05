@@ -11,13 +11,44 @@ const FormSchema = z.object({
 })
 
 const ProfileSchema = z.object({
-  username: z.string(),
+  firstname: z.string(),
+  lastname: z.string(),
   bio: z.string(),
   avatar_url: z.string(),
 })
 
-export async function createProfile(formData: FormData) {
+export async function createProfile(userId: string ,formData: FormData) {
   const supabase = createClient();
+
+  const data = ProfileSchema.parse({
+    firstname: formData.get('firstname'),
+    lastname: formData.get('lastname'),
+    bio: formData.get('bio'),
+    avatar_url: formData.get('avatar_url'),
+  })
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('User is not authenticated')
+  }
+
+  const { error } = await supabase.from('users').update({
+    firstname: data.firstname,
+    lastname: data.lastname,
+    bio: data.bio,
+    avatar_url: data.avatar_url,
+    id: user.id,
+  }).eq('id', userId)
+  
+  if (error) {
+    console.log('Error updating profile:', error)
+  }
+
+  revalidatePath('/dashboard/profile')
+  redirect('/dashboard/profile')
 
 
 }
@@ -35,14 +66,6 @@ export async function createPost(formData: FormData) {
   const oldHeader = data.content;
   const start = "](";
   const end = ")";
-
-  // Extract image from content in another way like getPublicUrl
-
-  // const file = formData.get('file') as File;
-  // if (!file) {
-  //   throw new Error('File is required');
-  // }
-  // let image = await handleImageUpload(file);
 
   let image = oldHeader.split(start).map((item) => {
     if (item.includes(end)) {
@@ -80,6 +103,9 @@ export async function createPost(formData: FormData) {
     email: user?.email,
     updated_at: new Date().toUTCString(),
     image: image,
+    firstname: null,
+    lastname: null,
+    avatar: null
   })
 
   if (error) {
@@ -197,6 +223,9 @@ export async function updatePost(postId: string, formData: FormData) {
       email: user?.email,
       updated_at: new Date().toUTCString(),
       image: image,
+      firstname: null,
+      lastname: null,
+      avatar: null
     })
     .eq('id', postId)
     .eq('email', user?.email ?? '')
