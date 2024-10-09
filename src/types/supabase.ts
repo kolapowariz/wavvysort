@@ -7,6 +7,31 @@ export type Json =
   | Json[]
 
 export type Database = {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       comments: {
@@ -89,49 +114,49 @@ export type Database = {
       }
       posts: {
         Row: {
+          avatar: string | null
           content: string
           created_at: string | null
           email: string | null
+          firstname: string | null
           header: string | null
           id: string
           image: string | null
+          lastname: string | null
           title: string
           updated_at: string | null
           user_id: string | null
           views: number | null
-          firstname: string | null
-          lastname: string | null
-          avatar: string | null
         }
         Insert: {
+          avatar?: string | null
           content: string
           created_at?: string | null
           email?: string | null
+          firstname?: string | null
           header?: string | null
           id?: string
           image?: string | null
+          lastname?: string | null
           title: string
           updated_at?: string | null
           user_id?: string | null
           views?: number | null
-          firstname: string | null
-          lastname: string | null
-          avatar: string | null
         }
         Update: {
+          avatar?: string | null
           content?: string
           created_at?: string | null
           email?: string | null
+          firstname?: string | null
           header?: string | null
           id?: string
           image?: string | null
+          lastname?: string | null
           title?: string
           updated_at?: string | null
           user_id?: string | null
           views?: number | null
-          firstname: string | null
-          lastname: string | null
-          avatar: string | null
         }
         Relationships: [
           {
@@ -145,34 +170,34 @@ export type Database = {
       }
       users: {
         Row: {
+          avatar_url: string | null
+          bio: string | null
           created_at: string | null
           email: string
-          id: string
-          updated_at: string | null
-          bio: string | null
           firstname: string | null
+          id: string
           lastname: string | null
-          avatar_url: string | null
+          updated_at: string | null
         }
         Insert: {
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string | null
           email: string
-          id: string
+          firstname?: string | null
+          id?: string
+          lastname?: string | null
           updated_at?: string | null
-          bio: string | null
-          firstname: string | null
-          lastname: string | null
-          avatar_url: string | null
         }
         Update: {
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string | null
           email?: string
-          id: string
+          firstname?: string | null
+          id?: string
+          lastname?: string | null
           updated_at?: string | null
-          bio: string | null
-          firstname: string | null
-          lastname: string | null
-          avatar_url: string | null
         }
         Relationships: []
       }

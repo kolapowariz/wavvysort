@@ -1,5 +1,4 @@
-'use server'
-import { handleImageUpload } from '@/components/MarkdownEditor'
+'use server';
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -14,42 +13,75 @@ const ProfileSchema = z.object({
   firstname: z.string(),
   lastname: z.string(),
   bio: z.string(),
-  avatar_url: z.string(),
+  // avatar_url: z.string(),
 })
 
-export async function createProfile(userId: string ,formData: FormData) {
+export async function updateProfile(formData: FormData) {
   const supabase = createClient();
 
-  const data = ProfileSchema.parse({
-    firstname: formData.get('firstname'),
-    lastname: formData.get('lastname'),
-    bio: formData.get('bio'),
-    avatar_url: formData.get('avatar_url'),
-  })
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('User is not authenticated')
-  }
-
-  const { error } = await supabase.from('users').update({
-    firstname: data.firstname,
-    lastname: data.lastname,
-    bio: data.bio,
-    avatar_url: data.avatar_url,
-    id: user.id,
-  }).eq('id', userId)
+  try {
+    const data = ProfileSchema.parse({
+      firstname: formData.get('firstname'),
+      lastname: formData.get('lastname'),
+      bio: formData.get('bio'),
+      // avatar_url: formData.get('avatar_url'),
+    })
   
-  if (error) {
-    console.log('Error updating profile:', error)
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+  
+    if (!user) {
+      throw new Error('User is not authenticated')
+    }
+
+    if (
+      data.firstname === null ||
+      data.firstname === undefined ||
+      data.firstname === '' ||
+      data.lastname === null ||
+      data.lastname === undefined ||
+      data.lastname === '' ||
+      data.bio === null ||
+      data.bio === undefined ||
+      data.bio === ''
+    ) {
+      throw new Error('Firstname, Lastname and bio are required')
+    }
+  
+    // const { error } = await supabase.from('users').insert({
+    //   firstname: data.firstname,
+    //   lastname: data.lastname,
+    //   bio: data.bio,
+    //   avatar_url: 'https://htwijjddwzuxqslqxkmw.supabase.co/storage/v1/object/public/profiles/IMG_4694-2.JPG',
+    //   id: user.id,
+    //   email: user.email,
+    //   created_at: new Date().toUTCString(),
+    //   updated_at: new Date().toUTCString(),
+    // })
+
+    const { error } = await supabase.from('users').update({
+      firstname: data.firstname,
+      lastname: data.lastname,
+      bio: data.bio,
+      avatar_url: 'https://htwijjddwzuxqslqxkmw.supabase.co/storage/v1/object/public/profiles/IMG_4694-2.JPG',
+      id: user.id,
+      email: user.email,
+      created_at: new Date().toUTCString(),
+      updated_at: new Date().toUTCString(),
+    }).eq('id', user.id).eq('email', user.email ?? '')
+    
+    if (error) {
+      console.log('Error updating profile:', error)
+    }
+  
+    console.log('Profile updated successfully')
+  
+    // revalidatePath('/dashboard/profile')
+    
+  } catch (error) {
+    console.log('Error fetching user:', error);
   }
-
-  revalidatePath('/dashboard/profile')
-  redirect('/dashboard/profile')
-
 
 }
 
