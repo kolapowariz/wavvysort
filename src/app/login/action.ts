@@ -102,7 +102,7 @@ export async function signup(formData: FormData) {
     return redirect('/signup?message=Error creating user')
   }
 
-  return redirect('/login')
+  return redirect('/profile')
 }
 
 export async function signOut(){

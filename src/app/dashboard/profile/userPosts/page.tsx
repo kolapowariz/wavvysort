@@ -38,7 +38,7 @@ async function UserPosts() {
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
-                <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" />
+                <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md" alt="Uplaoded Image" />
 
                 
                 {/* <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" /> */}

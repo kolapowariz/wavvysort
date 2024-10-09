@@ -1,5 +1,5 @@
 import Search from "@/components/search";
-import { DashboardSkeleton } from "@/components/skeleton";
+import { DashboardSkeleton, DescendingPostsSkeleton } from "@/components/skeleton";
 import { fetchDesendingPosts, fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Link from "next/link";
@@ -20,11 +20,11 @@ async function DesendingPosts() {
   return (
     <ul className="hidden xl:block">
       {posts.map((post: Post) => (
-        <li key={post.id}>
+        <li key={post.id} className="my-4 p-2 py-4">
           <Link href={`/dashboard/${post.id}`}>
-          <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md " alt="Uplaoded Image" />
+            <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md " alt="Uplaoded Image" />
             <h2>{post.title}</h2>
-            <p>{post.header}</p>
+            <p>{post.header?.slice(0, 30)}</p>
           </Link>
         </li>
       ))}
@@ -48,10 +48,10 @@ async function Posts({
   }
   return (
     <>
-      <ul className="xl:w-[40%] mx-auto md:border md:rounded-md">
+      <ul className="md:border md:rounded-md p-4">
 
         {posts.map((post: Post) => (
-          <li key={post.id} className="md:w-[100%] xl:w-[90%] mt-2 mb-4 mx-auto border-b-2">
+          <li key={post.id} className="md:w-[100%] mt-2 mb-4 mx-auto border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <p className="text-xs">{post.user_id}</p>
               <h2 className="text-lg md:text-xl font-bold">{post.title}</h2>
@@ -88,11 +88,13 @@ export default function Dashboard({
   return (
     <>
       <Search placeholder="search" />
-      <div className="flex">
+      <div className="flex justify-center gap-10">
         <Suspense key={query} fallback={<DashboardSkeleton />}>
           <Posts searchParams={searchParams} query={query} />
         </Suspense>
-        <DesendingPosts />
+        <Suspense fallback={<DescendingPostsSkeleton/>}>
+          <DesendingPosts />
+        </Suspense>
       </div>
     </>
   )
