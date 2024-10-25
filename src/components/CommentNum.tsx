@@ -6,10 +6,10 @@ import { fetchComments } from "@/lib/data";
 
 
 export async function CommentNum({ id }: { id: string }) {
-  const comments: CommentType[] = await fetchComments(id);
+  const comments: CommentType[] = (await fetchComments(id)) || [];
 
-  if (!comments) {
-    notFound();
+  if (!comments || comments.length === 0) {
+    return <p>No comments found.</p>;
   }
 
   return (

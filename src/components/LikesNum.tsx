@@ -4,7 +4,7 @@ import { fetchPostLikes } from "@/lib/data";
 import { LikePostButton } from "./likeButton";
 
 export async function LikesNum({ id }: { id: string }) {
-  const likes: LikesType[] = await fetchPostLikes(id);
+  const likes: LikesType[] = await fetchPostLikes(id) || [];
 
   if (!likes) {
     notFound();
