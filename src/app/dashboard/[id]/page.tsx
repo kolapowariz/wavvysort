@@ -45,11 +45,11 @@ async function Post({ id }: { id: string }) {
 }
 
 async function Comments ({id} : {id: string}) {
-  const comments: CommentType[] = await fetchComments(id);
+  const comments: CommentType[] = (await fetchComments(id)) || [];
 
 
-  if(!comments){
-    notFound();
+  if(!comments || comments.length === 0){
+    return <p>No comments found.</p>
   }
 
   return(
