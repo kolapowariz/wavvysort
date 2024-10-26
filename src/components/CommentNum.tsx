@@ -9,7 +9,7 @@ export async function CommentNum({ id }: { id: string }) {
   const comments: CommentType[] = (await fetchComments(id)) || [];
 
   if (!comments || comments.length === 0) {
-    return <p>No comments found.</p>;
+    return <button className="flex items-center gap-1"><ChatBubbleLeftIcon className="w-5 h-5" /><span>0</span></button>;
   }
 
   return (

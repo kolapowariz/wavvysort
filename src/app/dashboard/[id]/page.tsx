@@ -49,7 +49,7 @@ async function Comments ({id} : {id: string}) {
 
 
   if(!comments || comments.length === 0){
-    return <p>No comments found.</p>
+    return <p className="text-center mt-4">No comments.</p>
   }
 
   return(
