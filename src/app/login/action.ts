@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
 import { SubmitHandler } from 'react-hook-form';
-import { LoginFormInput } from '@/types/types';
+import { LoginFormInput, SignUpInput } from '@/types/types';
 
 
 export const emailLogin = async (data: LoginFormInput): Promise<{ success: boolean; error: string | null }> => {
@@ -27,39 +27,34 @@ export const emailLogin = async (data: LoginFormInput): Promise<{ success: boole
 
 
 
-export async function signup(formData: FormData) {
-  const supabase = createClient()
+export const signUp = async (data: SignUpInput ): Promise<{ success: boolean; error: string | null}> => {
+  const supabase = createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-    firstname: formData.get('firstname') as string,
-    lastname: formData.get('lastname') as string,
-  }
+  const { email, password, firstname, lastname } = data
 
-  const { data: signUpData, error: signUpError } = await supabase.auth.signUp(data)
+  const { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password })
 
   if (signUpError) {
-    return redirect('/signup?message=Error signing up')
+    return { success: false, error: signUpError.message}
   }
 
   const userId = signUpData.user?.id
   
 
   if(!userId){
-    return redirect('/signup?message=Error retrieving user information')
+    return { success: false, error: 'Error retrieving user information'}
   }
 
   const { error: insertError } = await supabase.from('users').insert([{ email: data.email, id: userId, firstname: data.firstname, lastname: data.lastname, bio: null, avatar_url: null }])
   
 
   if(insertError){
-    return redirect('/signup?message=Error creating user')
+    return { success: false, error: 'Error creating user'}
   }
 
-  return redirect('/profile')
+  redirect('/dashboard/profile')
+
+  return { success: true, error: null };
 }
 
 export async function signOut(){
