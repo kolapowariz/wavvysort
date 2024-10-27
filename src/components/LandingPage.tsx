@@ -97,33 +97,6 @@ export default function LandingPage() {
                             </div>
                             <div className="w-64 h-80 bg-[#09233c] rounded-xl mr-2"></div>
                         </section>
-                        {/* <section className="bg-[#09233c] mt-24 flex justify-around items-center">
-                            <div>
-                                <Image src='/next.svg' alt="Logo" width={40} height={40} />
-                            </div>
-                            <div className="w-80 mr-4">
-                                <p className="text-3xl font-bold">Join waveSort Today</p>
-                                <span className="text-gray-500 block text-sm text-center mt-2 mb-4">By peer-reviewing every article posted on waveSort, you are sure of every post.</span>
-                                <div className="flex justify-between items-center">
-                                    <Image src='/next.svg' alt="Logo" width={40} height={40} />
-                                    <div className="flex flex-col">
-                                        <div className="bg-teal-300 w-56 h-10 text-white rounded-md text-center flex justify-evenly items-center">
-                                            <div>
-                                                <Image src='/next.svg' alt="Logo" width={40} height={40} />
-                                            </div>
-                                            <a href=""> Download on Play Store</a>
-                                        </div>
-                                        <div className="bg-teal-300 w-56 h-10 text-white rounded-md text-center mt-2 flex justify-evenly items-center">
-                                            <div>
-                                                <Image src='/next.svg' alt="Logo" width={40} height={40} />
-                                            </div>
-                                            <a href="">Download on App Store</a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </section> */}
                         <section className="my-10 text-center">
                             <h3 className="text-2xl">What Do Our Users say About Us?</h3>
                             <p>Our 20,000+ customers have only positive things to say about us!

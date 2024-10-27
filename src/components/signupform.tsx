@@ -95,7 +95,7 @@ export default function SignupForm() {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900">Email</FormLabel>
+                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Email</FormLabel>
                     <FormControl>
                       <Input placeholder='johndoe@gmail.com' type="email"{...field} />
                     </FormControl>
@@ -108,7 +108,7 @@ export default function SignupForm() {
                 name='firstname'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900">Firstname</FormLabel>
+                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Firstname</FormLabel>
                     <FormControl>
                       <Input placeholder='john' type="text"{...field} />
                     </FormControl>
@@ -121,7 +121,7 @@ export default function SignupForm() {
                 name='lastname'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900">Lastname</FormLabel>
+                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Lastname</FormLabel>
                     <FormControl>
                       <Input placeholder='doe' type="text"{...field} />
                     </FormControl>
@@ -134,7 +134,7 @@ export default function SignupForm() {
                 name='password'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900">Password</FormLabel>
+                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Password</FormLabel>
                     <section className="relative">
                       <FormControl>
                         <Input placeholder='Enter your password' type={showPassword ? 'text' : 'password'}  {...field} />
@@ -142,11 +142,6 @@ export default function SignupForm() {
                       <button type='button' onClick={togglePassword} className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5">{showPassword ? 'Hide' : 'Show'}</button>
                     </section>
                     <FormMessage className="text-red-500" />
-                    <div className="text-sm mt-2 text-right">
-                      <Link href="#" className="font-semibold text-blue-400 hover:text-blue-500">
-                        Forgot password?
-                      </Link>
-                    </div>
                   </FormItem>
                 )}
               />
@@ -162,83 +157,3 @@ export default function SignupForm() {
   )
   
 }
-
-
-
-
-{/* <form action="#" method="POST" className="space-y-6">
-            <div>
-              <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                FirstName
-              </label>
-              <div className="mt-2">
-                <input
-                  id="firstname"
-                  name="firstname"
-                  type="text"
-                  required
-                  placeholder="John"
-                  autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white p-2"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="lastname" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                LastName
-              </label>
-              <div className="mt-2">
-                <input
-                  id="lastname"
-                  name="lastname"
-                  type="text"
-                  required
-                  placeholder="Doe"
-                  autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white p-2"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="sample@email.com"
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white p-2"
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="password"
-                  autoComplete="current-password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white p-2"
-                />
-              </div>
-            </div>
-
-            <div>
-              <Button formAction={signup} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Sign Up
-              </Button>
-              
-            </div>
-          </form> */}
