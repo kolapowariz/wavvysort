@@ -1,13 +1,10 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image';
-// import '../globals.css'
-
 
 const Foot = () => {
   return (
-    <div style={{fontFamily: 'Sora', fontWeight: 300}}>
+    <div style={{fontFamily: 'Sora', fontWeight: 300, marginBottom: '5rem'}}>
         <div className='flex justify-center gap-16 flex-wrap text-sm'>
             <div className=' w-1/5'>
                 <h2 className='font-bold '>Our Offices</h2>
