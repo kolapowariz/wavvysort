@@ -1,4 +1,4 @@
-'use server';
+'use server'
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -17,7 +17,7 @@ const ProfileSchema = z.object({
 })
 
 export async function updateProfile(formData: FormData) {
-  const supabase = createClient();
+  const supabase = createClient()
 
   try {
     const data = ProfileSchema.parse({
@@ -26,11 +26,11 @@ export async function updateProfile(formData: FormData) {
       bio: formData.get('bio'),
       // avatar_url: formData.get('avatar_url'),
     })
-  
+
     const {
       data: { user },
     } = await supabase.auth.getUser()
-  
+
     if (!user) {
       throw new Error('User is not authenticated')
     }
@@ -48,7 +48,7 @@ export async function updateProfile(formData: FormData) {
     ) {
       throw new Error('Firstname, Lastname and bio are required')
     }
-  
+
     // const { error } = await supabase.from('users').insert({
     //   firstname: data.firstname,
     //   lastname: data.lastname,
@@ -60,32 +60,33 @@ export async function updateProfile(formData: FormData) {
     //   updated_at: new Date().toUTCString(),
     // })
 
-    const { error } = await supabase.from('users').update({
-      firstname: data.firstname,
-      lastname: data.lastname,
-      bio: data.bio,
-      avatar_url: 'https://htwijjddwzuxqslqxkmw.supabase.co/storage/v1/object/public/profiles/IMG_4694-2.JPG',
-      id: user.id,
-      email: user.email,
-      created_at: new Date().toUTCString(),
-      updated_at: new Date().toUTCString(),
-    }).eq('id', user.id).eq('email', user.email ?? '')
-    
+    const { error } = await supabase
+      .from('users')
+      .update({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        bio: data.bio,
+        avatar_url:
+          'https://htwijjddwzuxqslqxkmw.supabase.co/storage/v1/object/public/profiles/IMG_4694-2.JPG',
+        id: user.id,
+        email: user.email,
+        created_at: new Date().toUTCString(),
+        updated_at: new Date().toUTCString(),
+      })
+      .eq('id', user.id)
+      .eq('email', user.email ?? '')
+
     if (error) {
       console.log('Error updating profile:', error)
     }
-  
+
     console.log('Profile updated successfully')
-  
+
     // revalidatePath('/dashboard/profile')
-    
   } catch (error) {
-    console.log('Error fetching user:', error);
+    console.log('Error fetching user:', error)
   }
-
 }
-
-
 
 export async function createPost(formData: FormData) {
   const supabase = createClient()
@@ -95,15 +96,19 @@ export async function createPost(formData: FormData) {
     content: formData.get('content'),
   })
 
-  const oldHeader = data.content;
-  const start = "](";
-  const end = ")";
+  const oldHeader = data.content
+  const start = ']('
+  const end = ')'
 
-  let image = oldHeader.split(start).map((item) => {
-    if (item.includes(end)) {
-      return item.split(end)[0];
-    }
-  }).filter((item) => item !== undefined).join(' ');
+  let image = oldHeader
+    .split(start)
+    .map((item) => {
+      if (item.includes(end)) {
+        return item.split(end)[0]
+      }
+    })
+    .filter((item) => item !== undefined)
+    .join(' ')
 
   const header = data.content.slice(0, 50)
 
@@ -137,7 +142,7 @@ export async function createPost(formData: FormData) {
     image: image,
     firstname: null,
     lastname: null,
-    avatar: null
+    avatar: null,
   })
 
   if (error) {
@@ -221,14 +226,18 @@ export async function updatePost(postId: string, formData: FormData) {
     content: formData.get('content'),
   })
 
-  const oldHeader = data.content;
-  const start = "](";
-  const end = ")";
-  let image = oldHeader.split(start).map((item) => {
-    if (item.includes(end)) {
-      return item.split(end)[0];
-    }
-  }).filter((item) => item !== undefined).join(' ');
+  const oldHeader = data.content
+  const start = ']('
+  const end = ')'
+  let image = oldHeader
+    .split(start)
+    .map((item) => {
+      if (item.includes(end)) {
+        return item.split(end)[0]
+      }
+    })
+    .filter((item) => item !== undefined)
+    .join(' ')
 
   const header = data.content.slice(0, 50)
 
@@ -257,7 +266,7 @@ export async function updatePost(postId: string, formData: FormData) {
       image: image,
       firstname: null,
       lastname: null,
-      avatar: null
+      avatar: null,
     })
     .eq('id', postId)
     .eq('email', user?.email ?? '')

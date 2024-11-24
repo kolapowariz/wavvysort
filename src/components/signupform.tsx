@@ -15,11 +15,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../components/ui/form"
-import { Input } from "../components/ui/input"
+} from "../components/ui/form";
+import { Input } from "../components/ui/input";
 
 const formSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address'}),
+  email: z.string().email({ message: 'Invalid email address' }),
   password: z.string().min(4, {
     message: 'Password must be at least 4 character'
   }),
@@ -34,7 +34,7 @@ const formSchema = z.object({
 
 
 export default function SignupForm() {
-  const [error, setError] = useState<string | null >(null)
+  const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
 
   const togglePassword = () => {
@@ -55,7 +55,7 @@ export default function SignupForm() {
     try {
       const result = await signUp(data)
 
-      if( result && !result.success) {
+      if (result && !result.success) {
         setError(result.error ?? null);
         return;
       }
@@ -88,7 +88,7 @@ export default function SignupForm() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
-        <Form {...form}>
+          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
               <FormField
                 control={form.control}
@@ -146,14 +146,14 @@ export default function SignupForm() {
                 )}
               />
               <Button type='submit' className="flex w-full justify-center rounded-md bg-teal-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">Sign Up</Button>
-              
+
               {error && <p className="text-red-500 text-center">{error}</p>}
             </form>
           </Form>
-          
+
         </div>
       </div>
     </>
   )
-  
+
 }

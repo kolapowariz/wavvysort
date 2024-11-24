@@ -131,7 +131,7 @@ export function DashboardSkeleton() {
           </div>
         </Skeleton>
       </div>
-      
+
 
     </section>
   )
@@ -341,7 +341,7 @@ export function UserPostsSkeleton() {
           </div>
         </Skeleton>
       </div>
-      
+
 
     </section>
   )

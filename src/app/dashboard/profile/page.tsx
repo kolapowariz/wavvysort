@@ -1,9 +1,9 @@
+import { SheetSide } from "@/components/ui/dashboard/sheeter";
 import { fetchUserProfile } from "@/lib/data";
+import type { User } from "@/types/custom";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import type { User } from "@/types/custom";
-import { SheetSide } from "@/components/ui/dashboard/sheeter";
 import UserPost from "./userPosts/page";
 
 
