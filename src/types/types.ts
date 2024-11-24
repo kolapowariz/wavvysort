@@ -1,16 +1,16 @@
 export type SpeakProps = {
-  tit: string;
-  content: string;
-};
+  tit: string
+  content: string
+}
 
 export type LoginFormInput = {
-  email: string,
+  email: string
   password: string
 }
 
 export type SignUpInput = {
-  email: string,
-  password: string,
-  firstname: string,
+  email: string
+  password: string
+  firstname: string
   lastname: string
 }

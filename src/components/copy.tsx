@@ -1,4 +1,3 @@
-
 'use client';
 function copyToClipboard() {
   const currentUrl = window.location.href; // Get the current URL

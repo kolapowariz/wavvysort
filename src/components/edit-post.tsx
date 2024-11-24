@@ -1,17 +1,15 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { updatePost } from '@/lib/action';
 import type { Post as PostType } from "@/types/custom";
-import "react-markdown-editor-lite/lib/index.css";
 import dynamic from 'next/dynamic';
-import { Skeleton } from './ui/skeleton';
-import Markdown from 'react-markdown';
+import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import "react-markdown-editor-lite/lib/index.css";
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
-import ReactMarkdown from 'react-markdown';
 import { handleImageUpload } from './MarkdownEditor';
-
+import { Skeleton } from './ui/skeleton';
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false, loading: () => <Skeleton className="w-[100%] mx-auto h-[75vh]" />

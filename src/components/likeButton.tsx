@@ -41,10 +41,10 @@
 // }
 
 'use client';
-import { HandThumbUpIcon } from '@heroicons/react/24/outline'
 import { likePost } from "@/lib/action";
+import { HandThumbUpIcon } from '@heroicons/react/24/outline';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useState } from "react";
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export function LikePostButton({ id }: { id: string }) {
 

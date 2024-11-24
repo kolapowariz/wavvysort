@@ -1,9 +1,6 @@
-import { notFound } from "next/navigation";
-import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
-import type { Comment as CommentType, Likes as LikesType } from "@/types/custom";
 import { fetchComments } from "@/lib/data";
-
-
+import type { Comment as CommentType } from "@/types/custom";
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
 export async function CommentNum({ id }: { id: string }) {
   const comments: CommentType[] = (await fetchComments(id)) || [];

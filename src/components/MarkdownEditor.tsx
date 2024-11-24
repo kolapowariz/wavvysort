@@ -1,16 +1,15 @@
 'use client';
-import dynamic from "next/dynamic";
-import "react-markdown-editor-lite/lib/index.css";
-import { ChangeEvent, useRef } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { createPost } from "@/lib/action";
-import Markdown from 'react-markdown'
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import ReactMarkdown from 'react-markdown';
-import { toast } from "sonner";
 import { supabase } from "@/lib/supabaseClient";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+import ReactMarkdown from 'react-markdown';
+import "react-markdown-editor-lite/lib/index.css";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
+import { toast } from "sonner";
+import { Skeleton } from "./ui/skeleton";
 
 
 
@@ -22,14 +21,14 @@ export const handleImageUpload = async (file: File) => {
   const fileExt = file.name.split('.').pop();
   const fileName = `${Math.random()}.${fileExt}`;
   const filePath = `${fileName}`;
-  
+
   let { error } = await supabase.storage.from('images').upload(filePath, file);
 
   if (error) {
     throw error;
   }
 
-  const { data: url} = await supabase.storage.from('images').getPublicUrl(filePath);
+  const { data: url } = await supabase.storage.from('images').getPublicUrl(filePath);
 
   console.log(url.publicUrl);
   return url.publicUrl;

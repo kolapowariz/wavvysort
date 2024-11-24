@@ -1,19 +1,17 @@
 'use client';
-import { useEffect } from "react";
-import { useState } from "react";
-import Image from "next/image";
-import poster from '../../public/poster.jpg';
-import posterTwo from '../../public/posterTwo.webp';
-import posterThree from '../../public/posterThree.png';
-import posterFour from '../../public/posterFour.jpeg';
-import posterFive from '../../public/posterFive.jpg';
-import posterSix from '../../public/posterSix.jpg';
-import posterSeven from '../../public/posterSeven.jpg';
-import posterEight from '../../public/posterEight.jpg';
-import Link from "next/link";
-import { Button } from "./ui/button";
 import Foot from "@/components/Foot";
-import { ModeToggle } from '@/components/toggle'
+import { ModeToggle } from '@/components/toggle';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import poster from '../../public/poster.jpg';
+import posterEight from '../../public/posterEight.jpg';
+import posterFive from '../../public/posterFive.jpg';
+import posterSeven from '../../public/posterSeven.jpg';
+import posterSix from '../../public/posterSix.jpg';
+import posterThree from '../../public/posterThree.png';
+import posterTwo from '../../public/posterTwo.webp';
+import { Button } from "./ui/button";
 
 
 export default function LandingPage() {
@@ -38,7 +36,7 @@ export default function LandingPage() {
                         <div className=" flex justify-between">
                             <Image src='/image.svg' alt="Logo" width={40} height={30} className=" h-auto" priority />
                         </div>
-                        <div> 
+                        <div>
                             <Link href='/dashboard' ><Button className="">Dashboard</Button></Link>
                         </div>
                         <div className="">
@@ -103,16 +101,16 @@ export default function LandingPage() {
                                 Take a look.</p>
                         </section>
                         <section className="flex justify-around items-center gap-2">
-                        <Image src={poster} alt="Poster" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
-                        <Image src={posterTwo} alt="Poster Two" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
-                        <Image src={posterThree} alt="Poster Three" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                            <Image src={poster} alt="Poster" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                            <Image src={posterTwo} alt="Poster Two" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                            <Image src={posterThree} alt="Poster Three" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
                         </section>
 
-                        
+
                         <section className="flex justify-around items-center mt-6 gap-2">
-                        <Image src={posterFive} alt="Poster Five" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
-                        <Image src={posterSix} alt="Poster Six" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
-                        <Image src={posterSeven} alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />
+                            <Image src={posterFive} alt="Poster Five" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                            <Image src={posterSix} alt="Poster Six" width={400} height={600} className="mb-8 rounded-3xl h-72" priority />
+                            <Image src={posterSeven} alt="Logo" width={400} height={600} className="mb-8 rounded-3xl" priority />
                         </section>
                     </main>
                     <Foot />

@@ -1,17 +1,12 @@
-import { createClient } from "@/utils/supabase/server"
-import { redirect } from "next/navigation";
-import { fetchUserPosts } from "@/lib/data";
-import Link from "next/link";
-import Markdown from "react-markdown";
-import rehypeHighlight from "rehype-highlight";
-import remarkGfm from "remark-gfm";
-import { DeletePost, UpdatePost } from "@/components/ui/dashboard/differentButton";
 import { UserPostsSkeleton } from "@/components/skeleton";
-import { Suspense } from "react";
+import { DeletePost, UpdatePost } from "@/components/ui/dashboard/differentButton";
+import { fetchUserPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
-import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
+import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 async function UserPosts() {
 
@@ -25,8 +20,9 @@ async function UserPosts() {
 
   const posts: Post[] = await fetchUserPosts(user.id) as unknown as Post[];
 
-  if (!posts) {
-    notFound();
+  if (!posts || posts.length === 0) {
+    // notFound();
+    return <p className="text-center mt-4 text-2xl md:text-3xl">You have not written any post. <Link href='/dashboard/editor' className="text-red-300">Click here to write your first post</Link> </p>
   }
 
   return (
@@ -39,11 +35,7 @@ async function UserPosts() {
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
                 <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md" alt="Uplaoded Image" />
-
-                
-                {/* <img src={`${post.image}`} className="w-full md:w-52 h-32 mx-auto md:mx-0 " alt="Uplaoded Image" /> */}
                 <p className="">{post.header?.split('')}</p>
-
               </section>
               <p className="text-xs">{post['created_at']?.slice(0, 10)}</p>
             </Link>

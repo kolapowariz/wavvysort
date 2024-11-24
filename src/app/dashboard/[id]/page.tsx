@@ -1,16 +1,15 @@
-import { PostSkeleton } from "@/components/skeleton";
-import { fetchComments, fetchPost } from "@/lib/data";
-import type { Post as PostType, Comment as CommentType } from "@/types/custom";
-import { Suspense } from "react";
-import remarkGfm from 'remark-gfm'
-import Speak from "@/components/speak";
-import rehypeHighlight from "rehype-highlight";
-import { notFound } from "next/navigation";
-import { CreateComment } from "@/components/ui/dashboard/comment";
-import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
-import ReactMarkdown from 'react-markdown';
 import CopyLinkButton from "@/components/copy";
+import { PostSkeleton } from "@/components/skeleton";
+import Speak from "@/components/speak";
+import { CreateComment } from "@/components/ui/dashboard/comment";
+import { fetchComments, fetchPost } from "@/lib/data";
+import type { Comment as CommentType, Post as PostType } from "@/types/custom";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import ReactMarkdown from 'react-markdown';
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from 'remark-gfm';
 
 
 async function Post({ id }: { id: string }) {
@@ -34,9 +33,9 @@ async function Post({ id }: { id: string }) {
         {/* <LikesNum id={post.id}/> */}
         <CommentNum id={post.id} />
         <CopyLinkButton />
-        
+
         {/* <p className="flex items-center gap-1"><EyeIcon className="w-5 h-5" /> <span>{post.views}</span></p> */}
-        
+
       </div>
       <CreateComment postId={post.id} />
     </main>
@@ -44,15 +43,15 @@ async function Post({ id }: { id: string }) {
 
 }
 
-async function Comments ({id} : {id: string}) {
+async function Comments({ id }: { id: string }) {
   const comments: CommentType[] = (await fetchComments(id)) || [];
 
 
-  if(!comments || comments.length === 0){
-    return <p className="text-center mt-4">No comments.</p>
+  if (!comments || comments.length === 0) {
+    return <p className="text-center mt-4">No comment.</p>
   }
 
-  return(
+  return (
     <section className="w-full md:w-[50%] mx-auto">
       {comments.map((comment) => (
         <div key={comment.id} className="mt-2 border-b-2">

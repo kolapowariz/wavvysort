@@ -1,12 +1,13 @@
 'use client'
 import { emailLogin } from "@/app/login/action";
 import { Button } from "@/components/ui/button";
+import { LoginFormInput } from "@/types/types";
+import { zodResolver } from '@hookform/resolvers/zod';
 import Image from "next/image";
-import Link from 'next/link'
+import Link from 'next/link';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -14,9 +15,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../components/ui/form"
-import { Input } from "../components/ui/input"
-import { LoginFormInput } from "@/types/types";
+} from "../components/ui/form";
+import { Input } from "../components/ui/input";
 // import { EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons";
 
 
@@ -47,14 +47,14 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormInput) => {
     try {
       const result = await emailLogin(data)
-  
+
       if (result && !result.success) {
         setError(result.error ?? null);
         return;
       }
 
       setError(null)
-      
+
     } catch (error) {
       console.error('Error during login:', error)
       setError('An unexpected error occurred. Please try again.')
@@ -119,7 +119,7 @@ export default function LoginForm() {
                 )}
               />
               <Button type='submit' className="flex w-full justify-center rounded-md bg-teal-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">Sign In</Button>
-              
+
               {error && <p className="text-red-500 text-center">{error}</p>}
             </form>
           </Form>
