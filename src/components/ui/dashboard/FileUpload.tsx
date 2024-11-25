@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from "react"
-import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
+import Image from "next/image";
+import { useState } from "react";
 
 export const FileUpload = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -33,25 +33,25 @@ export const FileUpload = () => {
         throw error;
       }
 
-      const { data: url} = await supabase.storage.from('images').getPublicUrl(filePath);
+      const { data: url } = await supabase.storage.from('images').getPublicUrl(filePath);
 
       console.log(url);
 
       setFileUrl(url.publicUrl);
       alert('File uploaded successfully');
-      
+
     } catch (error) {
       console.error('Error uploading file: ');
-      
+
     } finally {
       setUploading(false);
     }
   }
 
-  return(
+  return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={uploading}>{uploading? 'Uploading...' : 'Upload'}</button>
+      <button onClick={handleUpload} disabled={uploading}>{uploading ? 'Uploading...' : 'Upload'}</button>
       {fileUrl && (
         <div>
           <p>File uploaded to: {fileUrl}</p>

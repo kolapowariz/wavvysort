@@ -13,8 +13,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import Image from "next/image"
-import { handleProfileImageUpload } from "../../profileimageupload"
 import { updateProfile } from "@/lib/action"
 
 const SHEET_SIDES = ["right"] as const
@@ -28,10 +26,10 @@ export function SheetSide() {
 
     try {
       await updateProfile(data);
-      alert('Profile updated successfully');      
+      alert('Profile updated successfully');
     } catch (error) {
       console.log('Error updating profile:', error)
-      alert('Error updating profile')      
+      alert('Error updating profile')
     }
   }
   return (

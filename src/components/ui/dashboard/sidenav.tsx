@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import { signOut } from '@/app/login/action';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import NavLinks from '@/components/ui/dashboard/nav-links';
-import { PowerIcon } from '@heroicons/react/24/outline';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,13 +8,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import Image from "next/image"
-import { createClient } from '@/utils/supabase/server';
-import { signOut } from '@/app/login/action';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import type { User } from "@/types/custom";
+} from "@/components/ui/dropdown-menu";
 import { fetchUserProfile } from "@/lib/data";
+import type { User } from "@/types/custom";
+import { createClient } from '@/utils/supabase/server';
+import { PowerIcon } from '@heroicons/react/24/outline';
+import Image from "next/image";
+import Link from 'next/link';
 
 
 
