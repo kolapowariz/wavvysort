@@ -1,11 +1,11 @@
 'use client'
 import { createComment } from '@/lib/action';
-import { Button } from '../button';
 import { useRef } from 'react';
 import { toast } from "sonner";
+import { Button } from '../button';
 
 export function CreateComment({ postId }: { postId: string }) {
-  const formRef = useRef<HTMLFormElement>(null);  
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <form action={async (data) => {

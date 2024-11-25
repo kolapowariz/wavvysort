@@ -1,17 +1,16 @@
-import { createComment, deletePost } from '@/lib/action';
-import { TrashIcon, PencilIcon, PlusIcon, } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
+import { deletePost } from '@/lib/action';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { Button } from '../button';
 
 
@@ -32,7 +31,7 @@ export function DeletePost({ id }: { id: string }) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deletePostWithId}>
-          {/* <AlertDialogAction>Delete</AlertDialogAction> */}
+            {/* <AlertDialogAction>Delete</AlertDialogAction> */}
             <Button className='w-full' type="submit" >Delete
               <span className="sr-only">Delete</span>
             </Button>
