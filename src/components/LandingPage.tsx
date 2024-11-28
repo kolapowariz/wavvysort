@@ -69,9 +69,9 @@ export default function LandingPage() {
                                 <Image src='/image.svg' alt="Logo" width={60} height={40} priority className=" h-auto" />
                             </div>
                             <ul className="flex justify-around">
-                                <li className="p-2 mr-2"><Link href="">Home</Link></li>
-                                <li className="p-2 mr-2"><Link href="">Our Services</Link></li>
-                                <li className="p-2"><Link href="">Directory</Link></li>
+                                <li className="p-2 mr-2"><Link href="/">Home</Link></li>
+                                <li className="p-2 mr-2"><Link href="/">Our Services</Link></li>
+                                <li className="p-2"><Link href="/">Directory</Link></li>
                             </ul>
                             <div className="">
 
