@@ -1,16 +1,9 @@
-import { it, expect, describe } from 'vitest'
-import { cleanup, render, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import LandingPage from '@/components/LandingPage'
-import React from 'react'
 import '@testing-library/jest-dom/vitest'
-
-beforeEach(() => {
-  cleanup()
-})
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 
 describe('LandingPage', () => {
-
-  
   it('should render the wavvysort name', () => {
     render(<LandingPage />)
 
@@ -24,14 +17,22 @@ describe('LandingPage', () => {
 
     await waitForElementToBeRemoved(() => screen.getByText(/wavvysort/i))
 
-    screen.debug()
+    const dashboardButtons = screen.getAllByRole('button', { name: /dashboard/i });
+    dashboardButtons.forEach((btn) => expect(btn).toBeInTheDocument())
 
-    // expect(screen.getByRole('link', {name: /home/i})).toBeInTheDocument()
-    const dashboardButton = screen.getByRole('button', { name: /dashboard/i});
-    expect(dashboardButton).toBeInTheDocument()
-    const logInButton = screen.getByRole('button', { name: /log in/i});
-    expect(logInButton).toBeInTheDocument()
-    const signUpButton = screen.getByRole('button', { name: /sign up/i});
+    const logInButtons = screen.getAllByRole('button', { name: /log in/i });
+    logInButtons.forEach((btn) => expect(btn).toBeInTheDocument())
+
+    const signUpButton = screen.getByRole('button', { name: /sign up/i });
     expect(signUpButton).toBeInTheDocument()
+
+    const createButton = screen.getByRole('button', { name: /create/i })
+    expect(createButton).toBeInTheDocument()
+
+    expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument()
+
+    expect(screen.getByRole('link', { name: /our services/i })).toBeInTheDocument()
+
+    expect(screen.getByRole('link', { name: /directory/i })).toBeInTheDocument()
   })
 })
