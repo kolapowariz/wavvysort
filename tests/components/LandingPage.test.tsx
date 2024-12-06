@@ -1,7 +1,5 @@
 import LandingPage from '@/components/LandingPage'
-import '@testing-library/jest-dom/vitest'
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
 
 describe('LandingPage', () => {
   it('should render the wavvysort name', () => {
