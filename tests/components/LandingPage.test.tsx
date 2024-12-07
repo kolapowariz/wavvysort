@@ -1,6 +1,6 @@
-import LandingPage from '@/components/LandingPage'
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
-
+import LandingPage from '@/components/LandingPage';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent, { UserEvent } from '@testing-library/user-event'
 describe('LandingPage', () => {
   it('should render the wavvysort name', () => {
     render(<LandingPage />)
@@ -32,5 +32,16 @@ describe('LandingPage', () => {
     expect(screen.getByRole('link', { name: /our services/i })).toBeInTheDocument()
 
     expect(screen.getByRole('link', { name: /directory/i })).toBeInTheDocument()
+  })
+
+  it('should take the user to dashboard page when the dashboard button is clicked', async () => {
+    render(<LandingPage />)
+
+    await waitForElementToBeRemoved(() => screen.getByText(/wavvysort/i))
+    const dashboardButton = screen.getAllByRole('button', { name: /dashboard/i})
+    expect(dashboardButton[0]).toBeInTheDocument();
+
+    const user = userEvent.setup();
+    await user.click(dashboardButton[0])
   })
 })

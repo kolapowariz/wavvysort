@@ -100,7 +100,7 @@ export async function createPost(formData: FormData) {
   const start = ']('
   const end = ')'
 
-  let image = oldHeader
+  const image = oldHeader
     .split(start)
     .map((item) => {
       if (item.includes(end)) {
@@ -214,7 +214,7 @@ export async function deletePost(postId: string) {
     revalidatePath('/dashboard/')
     redirect('/dashboard')
   } catch (error) {
-    console.error('Error deleting post catch action')
+    console.error('Error deleting post catch action', error)
   }
 }
 
@@ -229,7 +229,7 @@ export async function updatePost(postId: string, formData: FormData) {
   const oldHeader = data.content
   const start = ']('
   const end = ')'
-  let image = oldHeader
+  const image = oldHeader
     .split(start)
     .map((item) => {
       if (item.includes(end)) {
