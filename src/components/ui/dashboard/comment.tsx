@@ -3,11 +3,13 @@ import { createComment } from '@/lib/action';
 import { useRef } from 'react';
 import { toast } from "sonner";
 import { Button } from '../button';
+import React from 'react';
 
 export function CreateComment({ postId }: { postId: string }) {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form action={async (data) => {
       // 'use server';
       await createComment(postId, data);

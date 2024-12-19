@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import UserPost from "./userPosts/page";
+import React from 'react';
 
 
 
@@ -18,7 +19,7 @@ export default async function Profile() {
   }
 
   const profiles: User[] = await fetchUserProfile(user.id) as unknown as User[];
-  const [userProfile] = await Promise.all([fetchUserProfile(user.id)]);
+  // const [userProfile] = await Promise.all([fetchUserProfile(user.id)]);
 
   // get public url for image.
   return (
@@ -28,7 +29,7 @@ export default async function Profile() {
       <section className="md:flex my-4 justify-between md:w-[70%] mx-auto border">
         <SheetSide />
         <ul className="text">
-          {profiles!.map((profile) => (
+          {profiles.map((profile) => (
             <li key={profile.id}>
               <p>{profile.email}</p>
               <p>{profile.bio}</p>
