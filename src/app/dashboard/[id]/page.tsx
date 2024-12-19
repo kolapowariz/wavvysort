@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from 'remark-gfm';
+import React from "react";
 
 
 async function Post({ id }: { id: string }) {
@@ -64,7 +65,7 @@ async function Comments({ id }: { id: string }) {
 }
 
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <Suspense fallback={<PostSkeleton />}>

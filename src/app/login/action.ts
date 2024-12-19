@@ -28,7 +28,7 @@ export const signUp = async (
 ): Promise<{ success: boolean; error: string | null }> => {
   const supabase = createClient()
 
-  const { email, password, firstname, lastname } = data
+  const { email, password } = data
 
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email,

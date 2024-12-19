@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import React from 'react';
 
 async function UserPosts() {
 
@@ -29,7 +30,7 @@ async function UserPosts() {
     <div>
       <h1 className="text-center text-2xl md:text-3xl">Posts Written By {user.email}</h1>
       <ul className="md:grid md:grid-cols-2 md:w-[100%]">
-        {posts!.map((post) => (
+        {posts.map((post) => (
           <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
@@ -50,7 +51,7 @@ async function UserPosts() {
   )
 }
 
-export default async function UserPost() {
+export default function UserPost() {
 
 
 
