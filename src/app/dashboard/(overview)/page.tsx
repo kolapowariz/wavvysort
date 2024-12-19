@@ -5,13 +5,14 @@ import { Post } from "@/types/custom";
 import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { LikesNum } from "@/components/LikesNum";
+// import { LikesNum } from "@/components/LikesNum";
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
 import Image from "next/image";
+import React from "react";
 
 
-async function DesendingPosts() {
+export async function DesendingPosts() {
   const posts = await fetchDesendingPosts() as Post[];
   if (!posts) {
     notFound();
@@ -32,8 +33,8 @@ async function DesendingPosts() {
   )
 }
 
-async function Posts({
-  searchParams,
+export async function Posts({
+  searchParams = {},
   query,
 }: {
   searchParams?: {
@@ -41,9 +42,9 @@ async function Posts({
   };
   query?: string;
 }) {
-  const finalQuery = query || (searchParams?.query || '');
+  const finalQuery = query || searchParams?.query || '';
   const posts: Post[] = await fetchFilteredPosts(finalQuery) as Post[];
-  if (!posts) {
+  if (!posts || posts.length === 0) {
     notFound();
   }
   return (

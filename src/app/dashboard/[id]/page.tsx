@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from 'remark-gfm';
+import React from "react";
 
 
 async function Post({ id }: { id: string }) {
