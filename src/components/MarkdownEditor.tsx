@@ -30,17 +30,14 @@ export const handleImageUpload = async (file: File) => {
 
   const { data: url } = await supabase.storage.from('images').getPublicUrl(filePath);
 
-  console.log(url.publicUrl);
   return url.publicUrl;
-
-
 };
 
 export default function MarkdownEditor() {
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleEditorChange = ({ html, text }: { html: string; text: string }) => {
-    console.log('handleEditorChange', html, text);
+    // console.log('handleEditorChange', html, text);
   };
 
   return (

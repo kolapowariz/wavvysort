@@ -5,7 +5,6 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import UserPost from "./userPosts/page";
-import React from 'react';
 
 
 

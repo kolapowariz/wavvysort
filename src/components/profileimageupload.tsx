@@ -13,8 +13,5 @@ export const handleProfileImageUpload = async (file: File) => {
 
   const { data: url } = await supabase.storage.from('profiles').getPublicUrl(filePath);
 
-  console.log(url.publicUrl);
   return url.publicUrl;
-
-
 };

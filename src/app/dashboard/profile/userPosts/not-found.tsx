@@ -1,6 +1,5 @@
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import React from 'react';
 
 export default function NotFound() {
   return (

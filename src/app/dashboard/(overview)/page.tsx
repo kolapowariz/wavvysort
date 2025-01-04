@@ -1,8 +1,8 @@
+import { DesendingPosts } from "@/components/DescendingPost";
+import { Posts } from "@/components/Posts";
 import Search from "@/components/search";
 import { DashboardSkeleton, DescendingPostsSkeleton } from "@/components/skeleton";
 import { Suspense } from "react";
-import { DesendingPosts } from "@/components/DescendingPost";
-import { Posts } from "@/components/Posts";
 
 
 export default function Page({

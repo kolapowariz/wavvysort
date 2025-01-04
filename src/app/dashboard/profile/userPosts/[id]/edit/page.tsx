@@ -1,7 +1,6 @@
 import EditPost from "@/components/edit-post";
 import { fetchPost } from "@/lib/data";
 import { notFound } from "next/navigation";
-import React from 'react';
 
 
 export default async function Page({ params }: { params: { id: string } }) {

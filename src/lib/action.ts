@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+import { fetchUserProfile } from './data'
 
 const FormSchema = z.object({
   title: z.string(),
@@ -48,17 +49,6 @@ export async function updateProfile(formData: FormData) {
     ) {
       throw new Error('Firstname, Lastname and bio are required')
     }
-
-    // const { error } = await supabase.from('users').insert({
-    //   firstname: data.firstname,
-    //   lastname: data.lastname,
-    //   bio: data.bio,
-    //   avatar_url: 'https://htwijjddwzuxqslqxkmw.supabase.co/storage/v1/object/public/profiles/IMG_4694-2.JPG',
-    //   id: user.id,
-    //   email: user.email,
-    //   created_at: new Date().toUTCString(),
-    //   updated_at: new Date().toUTCString(),
-    // })
 
     const { error } = await supabase
       .from('users')
@@ -130,6 +120,9 @@ export async function createPost(formData: FormData) {
     throw new Error('User is not authenticated')
   }
 
+  const profile = await fetchUserProfile(user.id)
+  const { firstname, lastname } = profile![0]
+
   const { error } = await supabase.from('posts').insert({
     title: data.title,
     content: data.content,
@@ -140,8 +133,8 @@ export async function createPost(formData: FormData) {
     email: user?.email,
     updated_at: new Date().toUTCString(),
     image: image,
-    firstname: null,
-    lastname: null,
+    firstname,
+    lastname,
     avatar: null,
   })
 

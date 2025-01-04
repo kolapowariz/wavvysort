@@ -1,6 +1,6 @@
-
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Image from "next/image";
@@ -25,11 +25,16 @@ export async function Posts({
   return (
     <>
       <ul className="md:border md:rounded-md p-4">
-
         {posts.map((post: Post) => (
           <li key={post.id} className="md:w-[100%] mt-2 mb-4 mx-auto border-b-2">
             <Link href={`/dashboard/${post.id}`}>
-              <p className="text-xs">{post.user_id}</p>
+              <section className="flex gap-2 items-center z-0">
+                <Avatar>
+                  {/* <AvatarImage src={post?.avatar_url ?? undefined} alt={post.firstname!} /> */}
+                  <AvatarFallback>{post.firstname?.slice(0, 1)}{post.lastname?.slice(0, 1)}</AvatarFallback>
+                </Avatar>
+                <p>{post.firstname} {post.lastname}</p>
+              </section>
               <h2 className="text-lg md:text-xl font-bold">{post.title}</h2>
               <section className="md:flex gap-2">
                 <Image src={`${post.image}`} width={300} height={300} className="w-full md:w-52 h-32 mx-auto md:mx-0 rounded-md " alt="Uplaoded Image" />

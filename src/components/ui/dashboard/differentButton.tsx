@@ -12,7 +12,6 @@ import { deletePost } from '@/lib/action';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '../button';
-import React from 'react';
 
 
 export function DeletePost({ id }: { id: string }) {
@@ -31,7 +30,6 @@ export function DeletePost({ id }: { id: string }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           <form action={deletePostWithId}>
             {/* <AlertDialogAction>Delete</AlertDialogAction> */}
             <Button className='w-full' type="submit" >Delete
