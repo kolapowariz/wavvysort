@@ -1,8 +1,8 @@
 import { fetchDesendingPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 
 export async function DesendingPosts() {
   const posts = await fetchDesendingPosts() as Post[];

@@ -21,7 +21,6 @@ export default async function handler(
 
       res
         .status(200)
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         .json({ message: 'View count updated', views: data[0].views })
     } catch (error) {
       res.status(500).json({ error: (error as Error).message })
