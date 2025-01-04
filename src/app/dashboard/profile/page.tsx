@@ -20,7 +20,6 @@ export default async function Profile() {
   const profiles: User[] = await fetchUserProfile(user.id) as unknown as User[];
   // const [userProfile] = await Promise.all([fetchUserProfile(user.id)]);
 
-  // get public url for image.
   return (
     <div className="mt-20">
       <h1 className="text-5xl text-center">Profile</h1>

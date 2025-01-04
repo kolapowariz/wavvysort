@@ -248,24 +248,25 @@ export async function updatePost(postId: string, formData: FormData) {
     throw new Error('Title and content are required')
   }
 
-  const { error } = await supabase
-    .from('posts')
-    .update({
-      title: data.title,
-      content: data.content,
-      header: header,
-      email: user?.email,
-      updated_at: new Date().toUTCString(),
-      image: image,
-      firstname: null,
-      lastname: null,
-      avatar: null,
-    })
-    .eq('id', postId)
-    .eq('email', user?.email ?? '')
+  try {
+    const { error } = await supabase
+      .from('posts')
+      .update({
+        title: data.title,
+        content: data.content,
+        header: header,
+        email: user?.email,
+        updated_at: new Date().toUTCString(),
+        image: image,
+      })
+      .eq('id', postId)
+      .eq('email', user?.email ?? '')
 
-  if (error) {
-    console.log('Error updating post:', error)
+    if (error) {
+      console.log('Error updating post:', error)
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error)
   }
 
   revalidatePath('/editor', 'layout')
@@ -300,12 +301,18 @@ export async function createComment(postId: string, formData: FormData) {
   }
 
   try {
+    const profile = await fetchUserProfile(user.id)
+    const { firstname, lastname } = profile![0]
+
     const { error } = await supabase.from('comments').insert([
       {
         id: crypto.randomUUID(),
         user_id: user.id,
         post_id: postId,
         content: data.comment,
+        firstname,
+        lastname,
+        avatar: null,
         created_at: new Date().toUTCString(),
       },
     ])
