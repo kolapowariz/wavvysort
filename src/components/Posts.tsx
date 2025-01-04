@@ -1,6 +1,6 @@
 import { CommentNum } from "@/components/CommentNum";
 import CopyLinkButton from "@/components/copy";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { fetchFilteredPosts } from "@/lib/data";
 import { Post } from "@/types/custom";
 import Image from "next/image";
@@ -20,7 +20,7 @@ export async function Posts({
   const finalQuery = query || searchParams?.query || '';
   const posts: Post[] = await fetchFilteredPosts(finalQuery) as Post[];
   if (!posts || posts.length === 0) {
-    notFound();
+    return <p className="text-center text-3xl mt-4">No post found.</p>
   }
   return (
     <>
@@ -28,9 +28,9 @@ export async function Posts({
         {posts.map((post: Post) => (
           <li key={post.id} className="md:w-[100%] mt-2 mb-4 mx-auto border-b-2">
             <Link href={`/dashboard/${post.id}`}>
-              <section className="flex gap-2 items-center z-0">
+              <section className="flex gap-2 items-center">
                 <Avatar>
-                  {/* <AvatarImage src={post?.avatar_url ?? undefined} alt={post.firstname!} /> */}
+                  <AvatarImage src={post?.avatar ?? undefined} alt={post.firstname!} />
                   <AvatarFallback>{post.firstname?.slice(0, 1)}{post.lastname?.slice(0, 1)}</AvatarFallback>
                 </Avatar>
                 <p>{post.firstname} {post.lastname}</p>
