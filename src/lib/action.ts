@@ -121,7 +121,7 @@ export async function createPost(formData: FormData) {
   }
 
   const profile = await fetchUserProfile(user.id)
-  const { firstname, lastname } = profile![0]
+  const { firstname, lastname, avatar_url } = profile![0]
 
   const { error } = await supabase.from('posts').insert({
     title: data.title,
@@ -135,7 +135,7 @@ export async function createPost(formData: FormData) {
     image: image,
     firstname,
     lastname,
-    avatar: null,
+    avatar: avatar_url,
   })
 
   if (error) {
@@ -302,7 +302,7 @@ export async function createComment(postId: string, formData: FormData) {
 
   try {
     const profile = await fetchUserProfile(user.id)
-    const { firstname, lastname } = profile![0]
+    const { firstname, lastname, avatar_url } = profile![0]
 
     const { error } = await supabase.from('comments').insert([
       {
@@ -312,7 +312,7 @@ export async function createComment(postId: string, formData: FormData) {
         content: data.comment,
         firstname,
         lastname,
-        avatar: null,
+        avatar: avatar_url,
         created_at: new Date().toUTCString(),
       },
     ])

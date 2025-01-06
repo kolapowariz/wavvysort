@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "../components/ui/form";
 import { Input } from "../components/ui/input";
-// import { EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons";
+import { EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons";
 
 
 const formSchema = z.object({
@@ -107,7 +107,7 @@ export default function LoginForm() {
                       <FormControl>
                         <Input placeholder='Enter your password' type={showPassword ? 'text' : 'password'}  {...field} />
                       </FormControl>
-                      <button type='button' onClick={togglePassword} className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5">{showPassword ? 'Hide' : 'Show'}</button>
+                      <button type='button' onClick={togglePassword} className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5">{showPassword ? <EyeNoneIcon width={20} /> : <EyeOpenIcon width={20} />}</button>
                     </section>
                     <FormMessage className="text-red-500" />
                     <div className="text-sm mt-2 text-right">

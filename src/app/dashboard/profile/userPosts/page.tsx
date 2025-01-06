@@ -30,7 +30,7 @@ async function UserPosts() {
       <h1 className="text-center text-2xl md:text-3xl">Posts Written By {user.email}</h1>
       <ul className="md:grid md:grid-cols-2 md:w-[100%]">
         {posts.map((post) => (
-          <li key={post.id} className="md:w-[95%] mt-2 mb-4 border-b-2">
+          <li key={post.id} className="md:w-[70%] mx-auto mt-2 mb-4 border-b-2">
             <Link href={`/dashboard/${post.id}`}>
               <h2 className="text-lg md:text-xl">{post.title}</h2>
               <section className="md:flex gap-2">
