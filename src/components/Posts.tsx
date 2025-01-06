@@ -30,7 +30,7 @@ export async function Posts({
             <Link href={`/dashboard/${post.id}`}>
               <section className="flex gap-2 items-center">
                 <Avatar>
-                  <AvatarImage src={post?.avatar ?? undefined} alt={post.firstname!} />
+                  <AvatarImage src={post?.avatar!} alt={post.firstname!} />
                   <AvatarFallback>{post.firstname?.slice(0, 1)}{post.lastname?.slice(0, 1)}</AvatarFallback>
                 </Avatar>
                 <p>{post.firstname} {post.lastname}</p>
