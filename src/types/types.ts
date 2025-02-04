@@ -13,4 +13,5 @@ export type SignUpInput = {
   password: string
   firstname: string
   lastname: string
+  avatarUrl: string
 }
