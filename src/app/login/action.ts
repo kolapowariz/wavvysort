@@ -52,12 +52,12 @@ export const signUp = async (
       firstname: data.firstname,
       lastname: data.lastname,
       bio: null,
-      avatar_url: null,
+      avatar_url: data.avatarUrl,
     },
   ])
 
-  if (insertError) {
-    return { success: false, error: 'Error creating user' }
+  if (insertError) {await supabase.auth.admin.deleteUser(userId);
+    return { success: false, error: 'Error creating user. Please try again.' };
   }
 
   redirect('/dashboard/profile')

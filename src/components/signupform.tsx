@@ -3,6 +3,7 @@ import { signUp } from "@/app/login/action";
 import { Button } from "@/components/ui/button";
 import { SignUpInput } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,7 +18,9 @@ import {
   FormMessage,
 } from "../components/ui/form";
 import { Input } from "../components/ui/input";
-import { EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons";
+import { handleProfileImageUpload } from "./profileimageupload";
+
+
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -30,7 +33,7 @@ const formSchema = z.object({
   lastname: z.string().min(1, {
     message: 'Input a valid name'
   }),
-  avatar: z.string().url({ message: 'Invalid URL'})
+  avatarUrl: z.string().url({ message: 'Invalid URL' })
 
 })
 
@@ -38,6 +41,7 @@ const formSchema = z.object({
 export default function SignupForm() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
 
   const togglePassword = () => {
     setShowPassword(!showPassword)
@@ -50,7 +54,7 @@ export default function SignupForm() {
       password: '',
       firstname: '',
       lastname: '',
-      avatar: ''
+      avatarUrl: ''
     }
   })
 
@@ -58,8 +62,8 @@ export default function SignupForm() {
     try {
       const result = await signUp(data)
 
-      if (result && !result.success) {
-        setError(result.error ?? null);
+      if (!result.success) {
+        setError(result.error ?? 'Signup failed. Please try again.');
         return;
       }
 
@@ -142,7 +146,7 @@ export default function SignupForm() {
                       <FormControl>
                         <Input placeholder='Enter your password' type={showPassword ? 'text' : 'password'}  {...field} />
                       </FormControl>
-                      <button type='button' onClick={togglePassword} className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5">{showPassword ? <EyeNoneIcon width={20} /> : <EyeOpenIcon width={20} />}</button>
+                      <button type='button' onClick={togglePassword} className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5" aria-label={showPassword ? 'Hide password' : 'Show password'}>{showPassword ? <EyeNoneIcon width={20} /> : <EyeOpenIcon width={20} />}</button>
                     </section>
                     <FormMessage className="text-red-500" />
                   </FormItem>
@@ -150,13 +154,46 @@ export default function SignupForm() {
               />
               <FormField
                 control={form.control}
-                name='avatar'
+                name='avatarUrl'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Avatar</FormLabel>
-                    <FormControl>
-                      <Input type="file" {...field} />
-                    </FormControl>
+                    <section className="flex items-center space-x-2">
+                      {avatarUrl ? (
+                        <Image
+                          src={avatarUrl}
+                          onError={() => setAvatarUrl(null)}
+                          width={50}
+                          height={50}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <div className="h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center">
+                          <span className="text-gray-500 text-xs text-center">No Image</span>
+                        </div>
+                      )}
+                      <FormControl>
+                        <Input type="file"
+                          accept="image/*"
+                          onChange={async (e) => {
+                            if (e.target.files && e.target.files[0]) {
+                              try {
+                                const url = await handleProfileImageUpload(e.target.files[0]);
+                                if (url) {
+                                  setAvatarUrl(url);
+                                  field.onChange(url);
+                                } else {
+                                  setError('Failed to upload avatar. Please try again')
+                                }
+
+                              } catch (uploadError) {
+                                setError('An error occurred during the upload')
+                              }
+                            }
+                          }} />
+                      </FormControl>
+                    </section>
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
