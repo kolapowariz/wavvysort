@@ -21,7 +21,6 @@ async function UserPosts() {
   const posts: Post[] = await fetchUserPosts(user.id) as unknown as Post[];
 
   if (!posts || posts.length === 0) {
-    // notFound();
     return <p className="text-center mt-4 text-2xl md:text-3xl">You have not written any post. <Link href='/dashboard/editor' className="text-red-300">Click here to write your first post</Link> </p>
   }
 
