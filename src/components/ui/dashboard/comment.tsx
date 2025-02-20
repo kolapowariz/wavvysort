@@ -9,7 +9,6 @@ export function CreateComment({ postId }: { postId: string }) {
 
   return (
     <form action={async (data) => {
-      // 'use server';
       await createComment(postId, data);
       formRef.current?.reset();
       toast("Your comment has been sent", {

@@ -18,7 +18,6 @@ export default async function Profile() {
   }
 
   const profiles: User[] = await fetchUserProfile(user.id) as unknown as User[];
-  // const [userProfile] = await Promise.all([fetchUserProfile(user.id)]);
 
   return (
     <div className="mt-20">

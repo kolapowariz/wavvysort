@@ -45,10 +45,6 @@ export function DeletePost({ id }: { id: string }) {
   );
 }
 
-
-
-// ...
-
 export function UpdatePost({ id }: { id: string }) {
   return (
     <Link

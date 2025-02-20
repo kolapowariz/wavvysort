@@ -59,9 +59,9 @@ export default async function SideNav() {
             <DropdownMenuItem>
               <Link href='/dashboard/profile' className='w-full'>Profile</Link>
             </DropdownMenuItem>
-            {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
             <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+            <DropdownMenuItem>Subscription</DropdownMenuItem>
             <DropdownMenuItem>
               <div>
                 {user !== null ? (
