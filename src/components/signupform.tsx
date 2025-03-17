@@ -42,6 +42,7 @@ export default function SignupForm() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const togglePassword = () => {
     setShowPassword(!showPassword)
@@ -59,6 +60,7 @@ export default function SignupForm() {
   })
 
   const onSubmit = async (data: SignUpInput) => {
+    setLoading(true)
     try {
       const result = await signUp(data)
 
@@ -71,6 +73,8 @@ export default function SignupForm() {
     } catch (error) {
       console.error('Error during signup:', error)
       setError('An unexpected error occurred. Please try again.')
+    } finally{
+      setLoading(false)
     }
   }
 
@@ -198,7 +202,7 @@ export default function SignupForm() {
                   </FormItem>
                 )}
               />
-              <Button type='submit' className="flex w-full justify-center rounded-md bg-teal-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">Sign Up</Button>
+              <Button type='submit' className="flex w-full justify-center rounded-md bg-teal-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600" disabled={loading}>{loading ? 'Signing Up...' : 'Sign Up'}</Button>
 
               {error && <p className="text-red-500 text-center">{error}</p>}
             </form>

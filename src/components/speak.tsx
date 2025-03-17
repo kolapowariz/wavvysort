@@ -1,13 +1,14 @@
 'use client'
 import { SpeakProps } from "@/types/types";
+import { PlayIcon, ResumeIcon, PauseIcon, CircleBackslashIcon} from '@radix-ui/react-icons'
 
 export default function Speak({ tit, content }: SpeakProps) {
   return (
     <main className="flex mb-4">
-      <button onClick={() => speak(tit, content)} className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white">Read</button>
-      <button onClick={() => pause()} className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white">Pause</button>
-      <button onClick={() => play()} className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white">Resume</button>
-      <button onClick={() => stop()} className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white">Cancel</button>
+      <button onClick={() => speak(tit, content)} title="Play" className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white"><PlayIcon width={20} height={20}/></button>
+      <button onClick={() => pause()} title="Pause" className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white"><ResumeIcon width={20} height={20}/></button>
+      <button onClick={() => play()} title="Resume" className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white"><PauseIcon width={20} height={20}/></button>
+      <button onClick={() => stop()} title="Cancel" className="py-2 px-4 rounded-lg mx-auto block bg-[#09233c] text-white"><CircleBackslashIcon width={20} height={20} /></button>
     </main>
   );
 }

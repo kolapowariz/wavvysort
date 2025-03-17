@@ -11,7 +11,7 @@ export function MainDashSkeleton() {
 
 export function DashboardSkeleton() {
   return (
-    <section className="mt-10 md:w-[50%]">
+    <section className="mt-5 md:w-[50%]">
       <div className="md:w-[100%] xl:w-[70%] mx-auto">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
@@ -148,7 +148,7 @@ export function DashboardSkeleton() {
 
 export function DescendingPostsSkeleton() {
   return (
-    <section className="md:w-[20%]">
+    <section className="hidden md:block md:w-[20%]">
       <div className="md:w-[100%]">
         <Skeleton className="p-4 w-full h-58 mt-2 mb-4 border-b-2 md:w-[95%]" >
           <div className="flex flex-col space-y-2 px-2">
@@ -209,7 +209,7 @@ export function DescendingPostsSkeleton() {
 
 export function PostSkeleton() {
   return (
-    <div className="mx-auto h-[80rem]">
+    <div className="mx-auto mt-20 h-[80rem]">
       <Skeleton className="mx-auto p-4 w-full h-[80rem] mb-4 border-b-2 md:w-[50%]" >
         <div className="flex flex-col space-y-2 px-2">
           <div className="flex justify-center items-center md:gap-2 gap-4">

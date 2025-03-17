@@ -31,6 +31,7 @@ const formSchema = z.object({
 export default function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const togglePassword = () => {
     setShowPassword(!showPassword)
@@ -45,6 +46,8 @@ export default function LoginForm() {
   })
 
   const onSubmit = async (data: LoginFormInput) => {
+    setLoading(true)
+    setError(null)
     try {
       const result = await emailLogin(data)
 
@@ -58,6 +61,8 @@ export default function LoginForm() {
     } catch (error) {
       console.error('Error during login:', error)
       setError('An unexpected error occurred. Please try again.')
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -118,7 +123,7 @@ export default function LoginForm() {
                   </FormItem>
                 )}
               />
-              <Button type='submit' className="flex w-full justify-center rounded-md bg-teal-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">Sign In</Button>
+              <Button type='submit' className="flex w-full justify-center rounded-md bg-teal-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600" disabled={loading}>{loading ? 'Signing In...' : 'Sign In' }</Button>
 
               {error && <p className="text-red-500 text-center">{error}</p>}
             </form>
